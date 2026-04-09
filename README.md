@@ -276,6 +276,12 @@ python -m pytest tests/ -v
 
 We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
+## Community / 交流群
+
+<img src="assets/wechat-group.jpg" width="240" alt="WeChat Group QR Code">
+
+Scan to join the ΩmegaWiki WeChat group / 扫码加入微信交流群
+
 ## Acknowledgments
 
 - **[Andrej Karpathy](https://x.com/karpathy/status/1909372692069236775)** — for the LLM-Wiki concept that inspired this project
