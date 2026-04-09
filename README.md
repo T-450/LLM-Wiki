@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="assets/logo.png" width="180" alt="ΩmegaWiki Logo">
+
 # ΩmegaWiki
 
 ### Karpathy's LLM-Wiki Vision, Fully Realized
@@ -43,49 +45,11 @@ Drop your `.tex` / `.pdf` files in a folder. Run one command. Get a fully cross-
 
 ## Architecture
 
-ΩmegaWiki follows a **five-layer knowledge-centric** architecture. The wiki is the center — not a sidecar.
+<div align="center">
+<img src="assets/architecture.png" width="700" alt="ΩmegaWiki Architecture">
+</div>
 
-```mermaid
-graph TB
-    subgraph "Layer 5: Presentation"
-        P[Papers / Surveys / Rebuttals / Reports]
-    end
-    subgraph "Layer 4: Skills — Orchestrators"
-        S1["ingest"] --> S2["ideate"]
-        S2 --> S3["exp-design"]
-        S3 --> S4["exp-run"]
-        S4 --> S5["exp-eval"]
-        S5 --> S6["paper-plan"]
-        S6 --> S7["paper-draft"]
-        S7 --> S8["paper-compile"]
-        S8 --> S9["rebuttal"]
-    end
-    subgraph "Layer 3: OmegaWiki — Knowledge Hub"
-        W["papers - concepts - topics - people\nideas - experiments - claims - Summary\ngraph: edges.jsonl + context_brief + open_questions"]
-    end
-    subgraph "Layer 2: Tools — Executors"
-        T1["research_wiki.py"] --- T2["lint.py"]
-        T2 --- T3["fetch_arxiv.py"]
-        T3 --- T4["fetch_s2.py"]
-        T4 --- T5["fetch_deepxiv.py"]
-    end
-    subgraph "Layer 1: Raw Evidence"
-        R[".tex .pdf notes code logs"]
-    end
-
-    R --> T1
-    T1 --> W
-    W --> S1
-    S1 --> W
-    S9 --> P
-    W --> P
-
-    style W fill:#1a1a2e,stroke:#e94560,stroke-width:3px,color:#fff
-```
-
-### The Wiki Is the State Machine
-
-In traditional research tools, knowledge lives in scattered notes, and pipelines pass artifacts forward without looking back. In ΩmegaWiki, **every skill reads from and writes back to the wiki**. The wiki accumulates structured knowledge — papers, concepts, claims, experiment results — and each new piece enriches the whole graph. Failed experiments aren't discarded; they become anti-repetition memory that prevents re-exploring dead ends.
+Every skill reads from and writes back to the wiki. Knowledge compounds — each new paper enriches the whole graph. Failed experiments aren't discarded; they become anti-repetition memory that prevents re-exploring dead ends.
 
 ## Quick Start
 
