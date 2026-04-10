@@ -1,0 +1,256 @@
+\begin{table}[tp]
+\caption{Classification of anomaly detection techniques, based on their \textit{class} (\viz \textsf{L} for log-based techniques, \textsf{DT} for distributed tracing-based techniques, \textsf{M} for monitoring-based techniques), the applied \textit{method}, the \textit{type} (\viz \textsf{F} for functional anomalies, \textsf{P} for performance anomalies) and \textit{granularity} of detected anomalies (\viz \textsf{A} for application-level anomalies, \textsf{S} service-level anomalies), and the \textit{input} they need to run.}
+\label{tab:detection}
+\begin{tiny}
+\begin{tabular}{%
+    >{\centering\arraybackslash}m{.15\textwidth}%
+    @{\ }
+    >{\centering\arraybackslash}m{.06\textwidth}%
+    @{\ }
+    >{\centering\arraybackslash}m{.18\textwidth}%
+    @{\ }
+    >{\centering\arraybackslash}m{.05\textwidth}%
+    @{\,}
+    >{\centering\arraybackslash}m{.08\textwidth}%
+    @{\ }
+    >{\centering\arraybackslash}m{.4\textwidth}%
+}
+    \thickline
+    %study
+        & 
+        &
+        & \multicolumn{2}{c}{\textbf{Anomaly \ }}
+        & 
+        \\ 
+    %study
+    \textbf{Reference} 
+        & \textbf{Class} 
+        & \textbf{Method}
+        & \textbf{Type}
+        & \textbf{Gran.} 
+        & \textbf{Needed Input}
+        \\ 
+    \thickline
+    OASIS \cite{38_Nandi2016_AnomalyDetectionControlFlowGraphMining}
+        & \textsf{L} 
+        & \cellcolor[HTML]{E7F2F8} unsupervised learning
+        %& online
+        & \textsf{F}
+        & \textsf{A}
+        & previous and runtime logs
+        \\
+    Jia \etal \cite{31_Jia2017_AnomalyDiagnosisHybridGraphModel}
+        & \textsf{L} 
+        & \cellcolor[HTML]{E7F2F8} unsupervised learning
+        %& online
+        & \textsf{F}, \textsf{P}
+        & \textsf{S}
+        & previous and runtime logs
+        \\
+    LogSed \cite{32_Jia2017_LogSed}
+        & \textsf{L} 
+        & \cellcolor[HTML]{E7F2F8} unsupervised learning
+        %& online
+        & \textsf{F}, \textsf{P}
+        & \textsf{S}
+        & previous and runtime logs
+        \\
+       \thinline
+    TraceAnomaly \cite{16_Liu2020_TraceAnomaly}
+        & \textsf{DT} 
+        & \cellcolor[HTML]{E7F2F8} unsupervised learning
+        %& online
+        & \textsf{F}, \textsf{P}
+        & \textsf{A}
+        & previous and runtime traces
+        \\
+    Nedelkoski \etal \cite{35_Nedelkoski2019_AnomalyDetectionTracingData}
+        & \textsf{DT}  %(with Zipkin
+        & \cellcolor[HTML]{E7F2F8} unsupervised learning 
+        %& online
+        & \textsf{F}, \textsf{P}
+        & \textsf{A}
+        & previous and runtime traces
+        \\
+    Jin \etal \cite{22_Jin2020_AnomalyDetectionMicroservicesRPCA}
+        & \textsf{DT} 
+        & \cellcolor[HTML]{E7F2F8} unsupervised learning 
+        %& offline % the authors explicitly state that their approach works well only offline
+        & \textsf{P}
+        & \textsf{S}
+        & previous and runtime traces
+        \\
+    
+    Seer \cite{17_Gan2019_Seer}
+        & \textsf{DT} 
+        & \cellcolor[HTML]{97CDD8} supervised learning
+        %& online
+        & \textsf{P}
+        & \textsf{S}
+        & previous and runtime traces
+        \\
+    
+    Nedelkoski \etal \cite{34_Nedelkoski2019_AnomalyDetectionDistributedTracing}
+        & \textsf{DT}  %(with Zipkin
+        & \cellcolor[HTML]{97CDD8} supervised learning
+        %& online
+        & \textsf{P}
+        & \textsf{S}
+        & previous and runtime traces
+        \\
+    
+    Bogatinovski \etal \cite{36_Bogatinovski2020_SelfSupervisedAnomalyDetection}
+        & \textsf{DT} 
+        & \cellcolor[HTML]{97CDD8} supervised learning
+        & \textsf{P}
+        & \textsf{A}
+        & previous and runtime traces
+        \\
+    
+    MEPFL \cite{02_Zhou2019_LatentErrorPrediction}
+        & \textsf{DT} 
+        & \cellcolor[HTML]{97CDD8} supervised learning 
+        %& online               
+        & \textsf{F}
+        & \textsf{S}
+        & app deployment, test cases
+        \\
+    Meng \etal \cite{23_Meng2021_DetectingAnomaliesMicroservices}
+        & \textsf{DT}  %(with Jaeger, Zipkin
+        & \cellcolor[HTML]{FFD1C2} trace comparison
+        %& offline % in TTV, authors state that the proposed approach is too costly to enact online detection on medium/large-scale multi-service apps
+        & \textsf{F}, \textsf{P}
+        & \textsf{S}
+        & previous and runtime traces 
+        \\
+    Wang \etal \cite{26_Wang2020_WorkflowAwareFaultDiagnosis}
+        & \textsf{DT}  %(with OpenTracing
+        & \cellcolor[HTML]{FFD1C2} trace comparison
+        %& offline % in TTV, authors state that the proposed approach is too costly to enact online detection on medium/large-scale multi-service apps
+        & \textsf{F}, \textsf{P}
+        & \textsf{S}
+        & previous and runtime traces
+        \\
+    Chen \etal \cite{39_Chen2020_MatrixSketchBasedAnomalyDetection}
+        & \textsf{DT} 
+        & \cellcolor[HTML]{FFD1C2} trace comparison
+        %& online
+        & \textsf{P}
+        & \textsf{S}
+        & previous and runtime traces
+        \\
+        \thinline
+    Gulenko \etal \cite{37_Gulenko2018_DetectingAnomalousBehaviourBlackBoxServices}
+        & \textsf{M} 
+        & \cellcolor[HTML]{E7F2F8} unsupervised learning
+        %& online
+        & \textsf{P}
+        & \textsf{S}
+        & app deployment, workload generator
+        \\
+    LOUD \cite{13_Mariani2018_LocalizingFaultsCloudSystems}
+        & \textsf{M}  
+        & \cellcolor[HTML]{E7F2F8} unsupervised learning
+        %& online
+        & \textsf{P}
+        & \textsf{S}
+        & app deployment, workload generator
+        \\
+    MicroRCA \cite{04_Wu2020_MicroRCA} 
+        & \textsf{M} 
+        & \cellcolor[HTML]{E7F2F8} unsupervised learning
+        %& online
+        & \textsf{P}
+        & \textsf{S}
+        & k8s app deployment, workload generator 
+        \\ 
+    
+    Wu \etal \cite{09_Wu2020_MicroserviceDiagnosisDeepLearning}
+        & \textsf{M} 
+        & \cellcolor[HTML]{E7F2F8} unsupervised learning
+        %& online
+        & \textsf{P}
+        & \textsf{S}
+        & k8s app deployment, workload generator
+        \\
+    
+    DLA \cite{14_Samir2019_DLA}
+        & \textsf{M} 
+        & \cellcolor[HTML]{E7F2F8} unsupervised learning
+        %& online
+        & \textsf{P}
+        & \textsf{S}
+        & k8s app deployment % HHMM model - not for anomaly detection!
+        \\
+    
+    CloudRanger \cite{29_Wang2018_CloudRanger}
+        & \textsf{M} 
+        & \cellcolor[HTML]{E7F2F8} unsupervised learning
+        %& online
+        & \textsf{P}
+        & \textsf{A}
+        & app deployment, prev. monitored KPIs
+        \\
+    
+    Hora \cite{27_Pitakrat2018_HoraExtended,28_Pitakrat2016_Hora}
+        & \textsf{M} 
+        & \cellcolor[HTML]{E7F2F8} unsupervised learning
+        %& online
+        & \textsf{P}
+        & \textsf{S}
+        & app deployment
+        \\
+    ADS \cite{15_Du2018_AnomalyDetectionContainerMicroservices}
+        & \textsf{M} 
+        & \cellcolor[HTML]{97CDD8} supervised learning
+        & \textsf{P}
+        & \textsf{S}
+        & k8s app deployment, workload generator, failure injectors
+        \\
+    PreMiSE \cite{33_Mariani2020_PredictingFailures}
+        & \textsf{M} 
+        & \cellcolor[HTML]{97CDD8} supervised learning
+        %& online
+        & \textsf{F}, \textsf{P}
+        & \textsf{S}
+        & app deployment, workload generator  % with one service per VM
+        \\
+    
+    CauseInfer \cite{40_Chen2020_CauseInfer,48_Chen2014_CauseInfer}
+        & \textsf{M} 
+        & \cellcolor[HTML]{F3EDCE} SLO check
+        %& online
+        & \textsf{P}
+        & \textsf{A}
+        & app deployment, SLOs
+        \\
+    
+    MicroScope \cite{06_Lin2018_Microscope,19_Guan2019_MicroscopeDemo}
+        & \textsf{M} %\textsf{M} 
+        & \cellcolor[HTML]{F3EDCE} SLO check
+        %& online
+        & \textsf{P}
+        & \textsf{A}
+        & k8s app deployment, SLOs
+        \\
+    
+    $\epsilon$-diagnosis \cite{49_Shan2019_epsilonDiagnosis}
+        & \textsf{M} 
+        & \cellcolor[HTML]{F3EDCE} SLO check
+        %& online
+        & \textsf{P}
+        & \textsf{A}
+        & k8s app deployment, SLOs
+        \\
+    M-MFSA- HDA \cite{24_Zang2018_FaultDiagnosisMicroservices}
+        & \textsf{M} 
+        & \cellcolor[HTML]{E6D6C7} heartbeating
+        %& online
+        & \textsf{F}
+        & \textsf{S}
+        & app deployment
+        \\
+    \thickline
+\end{tabular}
+\end{tiny}
+\end{table}

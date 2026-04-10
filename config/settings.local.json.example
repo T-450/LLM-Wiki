@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install:*)",
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(cp:*)",
+      "Bash(mkdir:*)",
+      "Bash(ls:*)",
+      "Bash(git ls-tree:*)",
+      "Read(*)",
+      "Edit(*)",
+      "WebSearch",
+      "WebFetch(*)",
+      "MCP(*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true
+}

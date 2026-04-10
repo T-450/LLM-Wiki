@@ -1,0 +1,26 @@
+% !TEX root=../main.tex
+\begin{abstract}
+
+Fault diagnosis is critical in many domains, as faults may lead to safety threats or economic losses.
+In the field of online service systems, operators rely on enormous monitoring data to detect and mitigate failures.
+Quickly recognizing a small set of root cause indicators for the underlying fault can save much time for failure mitigation.
+In this paper, we formulate the root cause analysis problem as a new causal inference task named \textit{intervention recognition}.
+We proposed a novel unsupervised causal inference-based method named \textit{Causal Inference-based Root Cause Analysis} (CIRCA).
+The core idea is a sufficient condition for a monitoring variable to be a root cause indicator, \textit{i.e.}, the change of probability distribution conditioned on the parents in the Causal Bayesian Network (CBN).
+Towards the application in online service systems, CIRCA constructs a graph among monitoring metrics based on the knowledge of system architecture and a set of causal assumptions.
+% \wenchi{for root cause analysis problem}
+The simulation study illustrates the theoretical reliability of CIRCA.
+The performance on a real-world dataset further shows that CIRCA can improve the recall of the top-1 recommendation by 25\% over the best baseline method.
+% what the obstacles to deployment are
+% However, a poor understanding of the system's normal status limits further improvement.
+
+% Quickly recognizing a small set of indicators (namely \textit{root cause}) for the underlying fault can save much time for failure mitigation. \wenchi{is it necessary to state the relationship between the indicator and the root cause here? or only claim "recognizing a small set of relevant indicators for the ..." }
+% In this paper, the root cause analysis problem is formulated as recognizing unexpected intervention to the system, and we find a sufficient condition for a monitoring variable to be one of the root cause indicators, \textit{i.e.}, the change of probability distribution conditioned on the parents in the Causal Bayesian Network.
+% Hence, we proposed a novel unsupervised method named \textit{Structural Root Cause Analysis} (SRCA) to apply such a criterion in online service systems.
+% \wenchi{In my view its more important to show novelty rather than mothod details in abstract}
+% SRCA first constructs a graph among monitoring metrics based on the knowledge of system architecture and a set of causal assumptions \wenchi{for root cause analysis problem}.
+% Taking the graph as a CBN, SRCA conducts hypothesis testing for each metric to check whether its distribution deviates from the expected one, instructed by the discovered criterion.
+% The simulation study illustrates the theoretical reliability of SRCA, and the performance on a real-world dataset further shows SRCA can improves the recall of the top-1 recommendation by 51\% over the best baseline method.
+ 
+ 
+\end{abstract}

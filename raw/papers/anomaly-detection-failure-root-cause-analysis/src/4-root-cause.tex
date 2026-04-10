@@ -1,0 +1,386 @@
+We hereafter survey the existing techniques for determining the possible root causes for anomalies observed in multi-service applications.
+Similarly to \Cref{sec:detection}, we first present the class of techniques enacting root cause analysis by directly processing the logs produced by application services (\Cref{sec:rca:service-logs}).
+We then present the root cause analysis techniques requiring multi-service applications to feature distributed tracing (\Cref{sec:rca:distributed-tracing}) or to install agents to monitor their services (\Cref{sec:rca:monitoring}).
+We finally discuss the surveyed root cause analysis techniques, with the support of a recapping table (\Cref{tab:rca}) and by also highlighting some open challenges in root cause analysis (\Cref{sec:rca:discussion}).
+
+\subsection{Log-based Root Cause Analysis Techniques}
+\label{sec:rca:service-logs}
+Root cause analysis can be enacted by only considering the logs natively produced by the services forming an application (and without requiring further instrumentation like distributed tracing or monitoring agents).
+This is done by processing the application logs to derive a \enquote{causality graph}, whose vertices model application services, and whose directed arcs model that an anomaly in the source service may possibly cause an anomaly in the target service.
+The causality graph is then visited to determine a possible root cause for an anomaly observed on a multi-service application.
+
+\subsubsection{{Causality Graph-based Analysis}}
+Aggarwal \etal \cite{10_Aggarwal2020_FaultsGoldenSignals} allow to determine the root causes for functional anomalies observed on the frontend of a multi-service application, \viz frontend errors that users face when the application fails.
+Aggarwal \etal \cite{10_Aggarwal2020_FaultsGoldenSignals} consider the subset of application services including the frontend and the services that logged error events.
+They model the logs of considered services as multivariate time series, and they compute Granger causality tests \cite{Arnold2007_GrangerMethodsTemporalCausalModelling} on such time series to determine %temporal 
+causal dependencies among the errors logged by the corresponding services.
+The obtained cause-effect relations are used to refine the topology specified in an input application specification, so as to derive a causality graph, \viz a graph whose nodes model application services, and where an arc from a service to another that the errors logged by the source service can have caused those logged by the target service.
+The services that, according to the causality graph, can have caused directly or indirectly the error observed on the application frontend are considered as the possible root causes for the corresponding faults.
+The candidate services are scored by visiting the causality graph with the random walk-based algorithm proposed by MonitorRank \cite{21_Kim2013_RootCauseDetectionSOA} (which we present in \Cref{sec:rca:distributed-tracing:topology}).
+% The highest scored candidate is considered the most probable root cause for the functional anomaly observed on the application frontend, and it is returned by Aggarwal \etal \cite{10_Aggarwal2020_FaultsGoldenSignals}
+Aggarwal \etal \cite{10_Aggarwal2020_FaultsGoldenSignals} then return the highest scored candidate, which is considered the most probable root cause for the observed functional anomaly.
+
+\subsection{Distributed Tracing-based Root Cause Analysis Techniques}
+\label{sec:rca:distributed-tracing}
+The information available in distributed traces can be exploited to support application operators in determining the possible root causes for anomalies observed in their applications.
+In this perspective, the most basic technique consists of providing a systematic methodology to visually compare traces, so that application operators can manually determine what went wrong in the \enquote{anomalous traces}, \viz the traces corresponding to observed anomalies.
+
+To automate the root cause analysis, the alternatives are twofold.
+An alternative is the directly analysing traces to detect which services experienced anomalies, which may have possibly caused the observed anomalies.
+The other possibility is to automatically determine the topology of an application (\viz a directed graph whose vertices model the application services and whose directed arcs model the service interactions) from the available traces, and to use such topology to drive the analysis for determining the possible root causes for anomalies observed on an application.
+
+\subsubsection{{Visualization-based Analysis}}
+Zhou \etal \cite{01_Zhou2021_FaultAnalysisDebuggingMicroservices} and GMTA \cite{45_Guo2020_GMTA} allow application operators to manually determine the possible root causes for application-level anomalies, based on a trace comparison methodology to be enacted with the support of a trace visualisation tool.
+Zhou \etal \cite{01_Zhou2021_FaultAnalysisDebuggingMicroservices} propose to use ShiViz \cite{Beschastnikh2016_ShiViz} to visualise the traces produced by a multi-service application as interactive time-space diagrams.
+This allows to determine the root causes for the traces corresponding to some anomaly observed in the application frontend by means of pairwise comparison of traces.
+The idea is that the root causes for an anomalous trace are contained in a portion of such trace that is different from what contained in a successful trace for the same task, whilst shared with other anomalous traces. 
+Zhou \etal \cite{01_Zhou2021_FaultAnalysisDebuggingMicroservices} hence propose to consider the traces corresponding to the observed anomaly and a set of reference, successful traces for the same set of tasks. 
+They then propose to compare a successful trace and an anomalous trace corresponding to the same task. 
+This allows obtaining a set of so-called \enquote{diff ranges}, each of which corresponds to multiple consecutive events that are different between the two traces. 
+Zhou \etal \cite{01_Zhou2021_FaultAnalysisDebuggingMicroservices} propose to repeat this process for any pair of successful and anomalous traces for the same task, by always restricting the set of \enquote{diff ranges} to those that are shared among all analysed traces. 
+The \enquote{diff ranges} obtained at the end of the process are identified as the possible root causes for the observed anomaly. 
+
+GMTA \cite{45_Guo2020_GMTA} provides a framework to collect, process, and visualise traces, which can be used to determine the root causes for functional anomalies observed on a multi-service application.
+GMTA \cite{45_Guo2020_GMTA} collects the traces produced by the application services, and it automatically process them to determine interaction \enquote{paths} among services.
+A path is an abstraction for traces, which only models the service interactions in a trace and their order with a tree-like structure.
+GMTA \cite{45_Guo2020_GMTA} also groups paths based on their corresponding \enquote{business flow}, defined by application operators to indicate which operations could be invoked to perform a task and in which order.
+GMTA \cite{45_Guo2020_GMTA} then allows to manually enact root cause analysis by visually comparing the paths corresponding to traces of successful executions of a given business flow with that corresponding to the anomalous trace where the functional anomaly was observed. 
+This allows to determine whether the paths diverge and, if this is the case, which events possibly caused the paths to diverge.
+In addition, if the anomalous traces include error events, GMTA \cite{45_Guo2020_GMTA} visually displays such errors together with the corresponding error propagation chains. 
+This further allows to determine the services that first logged error events in the anomalous trace, hence possibly causing the observed anomaly. 
+
+Both Zhou \etal \cite{01_Zhou2021_FaultAnalysisDebuggingMicroservices} and GMTA \cite{45_Guo2020_GMTA} allow to determine the root causes for anomalies observed on the frontend of an application, \viz the events that caused the trace to behave anomalously, and their corresponding services. 
+They also highlight that by looking at the root cause events, or by inspecting the events logged by the corresponding services close in time to such events, application operators can determine the reasons for such services to cause the observed anomaly, \viz whether they failed internally, because of some unexpected answer from the services they invoked, or because of environmental reasons (\eg lack of available computing resources).
+
+\subsubsection{{Direct Analysis}}
+CloudDiag \cite{41_Mi2013_PerformanceDiagnosisCloud} and TraceAnomaly \cite{16_Liu2020_TraceAnomaly} determine the root causes of anomalies observed on the frontend of an application
+{%
+by directly analysing the response times in the service interactions involved in collected traces.
+Their aim is determining other anomalies that may have possibly caused the observed one. 
+CloudDiag \cite{41_Mi2013_PerformanceDiagnosisCloud} and TraceAnomaly \cite{16_Liu2020_TraceAnomaly}  however apply two different methods for analysing such response times.
+}
+
+CloudDiag \cite{41_Mi2013_PerformanceDiagnosisCloud} allows application operators to manually trigger the root cause analysis when a performance anomaly is observed on the application frontend.
+It then processes collected traces to determine \enquote{anomalous groups}, \viz groups of traces sharing the same service call tree and where the coefficient of variation \cite{Neil2010_CoefficientVariation} of response times in service interactions is above a given threshold. 
+Anomalous groups are processed to identify the services that most contributed to the anomaly, based on Robust Principal Component Analysis (RPCA). 
+When a matrix is corrupted by gross sparse errors, RPCA can extract the columns where the errors appear \cite{Candes2009_RobustPrincipalComponentAnalysis}.
+CloudDiag \cite{41_Mi2013_PerformanceDiagnosisCloud} represents the traces in a category as a matrix, and it exploits RPCA to determine the error columns corresponding to services with anomalous response times.
+Such services constitute the possible root causes for the observed anomaly, which are returned by CloudDiag \cite{41_Mi2013_PerformanceDiagnosisCloud}.
+Root causing services are ranked based on the number of times they appeared as anomalous in anomalous categories: the larger the number of times is, the more possible is that a service caused the observed anomaly.
+
+TraceAnomaly \cite{16_Liu2020_TraceAnomaly} instead determines the possible root causes for the functional and performance anomalies it detects while a multi-service application is running.
+As discussed in \Cref{sec:detection:distributed-tracing:unsupervised-learning}, functional anomalies are detected when previously unseen call paths occur in a trace.
+The root causes for functional anomalies hence obviously coincides with the services starting the first interaction of the previously unseen call paths.
+Performance anomalies are instead detected by means of a deep Bayesian neural network, which classifies newly produced traces as normal/anomalous, without providing insights on the services which caused a trace to get classified as anomalous.
+TraceAnomaly \cite{16_Liu2020_TraceAnomaly} hence enacts a root cause analysis by correlating the response times of service interactions in the anomalous trace with the average response times in normal conditions: each service interaction whose response time significantly deviates from the average response time is considered as anomalous.
+This results in one or more sequences of anomalous service interactions.
+The root causes for the detected performance anomaly are extracted from such anomalous service interactions sequences, by picking the last invoked services as possible root causes.
+
+\subsubsection{{Topology Graph-based Analysis}}
+\label{sec:rca:distributed-tracing:topology}
+The approach of building and processing topology graphs for determining the possible root causes of performance anomalies is adopted by MonitorRank \cite{21_Kim2013_RootCauseDetectionSOA} and MicroHECL \cite{47_Liu2021_MicroHECL}.
+They indeed both rely on services to produce interaction traces, including the start and end times of service interactions, their source and target services, performance metrics (\viz latency, error count, and throughput), and the unique identifier of the corresponding user request. 
+This information is then processed to reconstruct service invocation chains for the same user request, which are then combined to build the application topology.
+They however differ because they consider different time slices for building topologies, and since MonitorRank \cite{21_Kim2013_RootCauseDetectionSOA} and MicroHECL \cite{47_Liu2021_MicroHECL} exploit topologies to determine the root causes of application-level and service-level anomalies, respectively.
+{MonitorRank \cite{21_Kim2013_RootCauseDetectionSOA} and MicroHECL \cite{47_Liu2021_MicroHECL} also differ in the method applied to enact root cause analysis: MonitorRank \cite{21_Kim2013_RootCauseDetectionSOA} performs a random walk on the topology graph, whereas MicroHECL explores it through a breadth-first search (BFS).}
+
+MonitorRank \cite{21_Kim2013_RootCauseDetectionSOA} enacts batch processing to periodically process the traces produced by application services to generate a topology graph for each time period. 
+Based on such graphs, MonitorRank \cite{21_Kim2013_RootCauseDetectionSOA} allows to determine the possible root causes of a performance anomaly observed on the application frontend in a given time period.
+This is done by running the personalised PageRank algorithm \cite{Glen2003_PersonalizedPageRank} on the topology graph corresponding to the time period of the observed anomaly to determine its root causes.
+MonitorRank \cite{21_Kim2013_RootCauseDetectionSOA} starts from the frontend service, and it visits the graph by performing a random walk with a fixed number of random steps.
+At each step, the next service to visit is randomly picked in the neighbourhood of the service under visit, \viz among the service under visit, those it calls, and those calling it. 
+The pickup probability of each neighbour is proportional to its relevance to the anomaly to be explained, computed based on the correlation between its performance metrics and those of the frontend service (with such metrics available in the traces produced in the considered time period). 
+MonitorRank \cite{21_Kim2013_RootCauseDetectionSOA} then returns the list of visited services, ranked by the number of times they have been visited.
+The idea is that, given that services are visited based on the correlation of their performances with those of the application frontend, the more are the visits to a service, the more such service can explain the performance anomaly observed on the application frontend. 
+
+MicroHECL \cite{47_Liu2021_MicroHECL} instead builds the topology based on the traces produced in a time window of a given size, which ends at the time when a service experienced the performance anomaly whose root causes are to be determined.
+Based on such topology, MicroHECL \cite{47_Liu2021_MicroHECL} determines the anomaly propagation chains that could have led to the observed anomaly.
+This is done by starting from the service where the anomaly was observed and by iteratively extending the anomaly propagation chains along the possible anomaly propagation directions, \viz from callee to caller for latency/error count anomalies, and from caller to callee for throughput anomalies. 
+At each iteration, the services that can be reached through anomaly propagation directions are included in the anomaly propagation chains if they experienced corresponding anomalies. 
+This is checked by applying formerly trained machine learning models for offline detection of anomalies on each service, \viz support vector machines \cite{Scholkopf1999_SupportVectorLearning} for latency anomalies, random forests \cite{Breiman2001_RandomForests} for error count anomalies, and 3-sigma rule  \cite{Chandola2009_SurveyAnomalyDetection} for throughput anomalies. 
+When anomaly propagation chains cannot be further extended, the services at the end of each determined propagation chain are considered as possible root causes for the initial anomalous service.
+MicroHECL \cite{47_Liu2021_MicroHECL} finally ranks the possible root causes, based on the Pearson correlation between their performance metrics and those of the service where the performance anomaly was initially observed.
+
+\subsection{Monitoring-based Root Cause Analysis Techniques}
+\label{sec:rca:monitoring}
+Root cause analysis is also enacted by processing the KPIs monitored on the services forming an application, throughout monitoring agents installed alongside the application services.
+The techniques enacting such a kind of analysis can be further partitioned in three sub-classes, based on the method they apply to determine the possible root causes for an anomaly observed on a service.
+A possibility is to 
+{%
+directly process monitored KPIs to determine other services that experienced anomalies, which may have possibly caused that actually observed.
+}
+Other alternatives rely on topology/causality graphs modelling the dependencies among the services in an application, as they visit such graphs to determine which services may have possibly caused the observed anomaly.
+
+\subsubsection{{Direct Analysis}}
+When an anomaly is detected on the frontend of a multi-service application, its possible root causes can be determined by identifying the KPIs monitored on the application services that were anomalous in parallel with the frontend anomaly.
+The idea is indeed that the anomalous KPIs ---and their corresponding services--- can have possibly caused the detected frontend anomaly.
+This technique is actually enacted by $\epsilon$-diagnosis \cite{49_Shan2019_epsilonDiagnosis} to automatically determine the possible root causes of the performance anomalies it detects while the application is running (\Cref{sec:detection:monitoring:slo-check}).
+$\epsilon$-diagnosis \cite{49_Shan2019_epsilonDiagnosis} considers the time series of KPIs monitored on each container running the application services, from which it extracts two same-sized samples. 
+A sample corresponds to the time period where the frontend anomaly was detected, while the other sample corresponding to a time period where no anomaly was detected.
+To determine whether a KPI can have determined the detected anomaly, the similarity between the two samples is computed: if the similarity between the two samples is beyond a given threshold, this means that no change on the KPI occurred while the frontend anomaly was monitored, hence meaning that such KPI cannot have caused such anomaly. 
+Instead, if the similarity is below the given threshold, the two samples are diverse enough to consider the change in such KPI as anomalous and possibly causing the frontend anomaly.
+The list of anomalous KPIs, together with the corresponding services, is returned by $\epsilon$-diagnosis \cite{49_Shan2019_epsilonDiagnosis} as the set of possible root causes.
+
+Wang \etal \cite{20_Wang2020_RootCauseMetricLocation}, PAL \cite{42_Nguyen2011_PAL}, and FChain \cite{43_Nguyen2013_FChain} also exploit offline detection of anomalous KPIs to determine the possible root causes for performance anomalies detected on the frontend of a multi-service application, by however relying on external monitoring tools to detect such anomalies.
+The root cause analysis proposed by Wang \etal \cite{20_Wang2020_RootCauseMetricLocation} processes both the logs natively produced by the services forming an application and the time series of KPIs monitored on such services by devoted monitoring agents.
+They first train a long-short term memory neural network for each service, which models its baseline behaviour in failure-free runs.
+When an anomaly is observed on the application, each trained neural network processes the logs produced by the corresponding service in the time interval when the anomaly was observed.
+The outputs of all trained neural networks are combined to obtain a time series of anomaly degrees for the application.
+Wang \etal \cite{20_Wang2020_RootCauseMetricLocation} then apply mutual information \cite{Peng2005_MutualInformation} to determine the dependency of the anomaly degree on the KPIs monitored on application services in the same interval. 
+The obtained correlation values are used to provide the list of KPIs that may have possibly caused the observed application anomaly, together with the services on which they have been monitored. 
+The list of root causes is sorted by decreasing correlation value, with the goal of first showing the services' KPIs having higher probability to have caused the observed anomaly.
+
+PAL \cite{42_Nguyen2011_PAL} and FChain \cite{43_Nguyen2013_FChain} propose two similar techniques to determine the possible root causes for an application-level performance anomaly, both based on the analysis of system-level KPIs monitored on application services (\viz CPU usage, free memory, and network traffic).
+Their assumption is indeed that performance anomalies are manifested also as observable changes in one or multiple system-level KPIs.
+When a performance anomaly is detected on the application frontend, PAL \cite{42_Nguyen2011_PAL} and FChain \cite{43_Nguyen2013_FChain} examine each system-level KPI monitored on each application service in a look-back window of a given size. 
+Each KPI is analysed with a combination of CUSUM (Cumulative Sum) charts and bootstrapping \cite{Basseville1993_DetectionAbruptChanges}.
+CUSUM charts are used to measure the magnitude of changes for the monitored KPI values, both in the original sequence of monitored values and in \enquote{bootstraps}, \viz permutations of the monitored KPI values obtained by randomly reordering them. 
+If the original sequence of monitored KPI values has a magnitude of change higher than most bootstraps, it is considered anomalous and the time when the anomaly started is identified based on the CUSUM charts of the original sequence.
+PAL \cite{42_Nguyen2011_PAL} and FChain \cite{43_Nguyen2013_FChain} then check whether anomalies affected all application services. 
+If this is the case, the anomaly is classified as due to external reasons (\eg workload spikes). 
+Instead, if only a subset of application services is affected by anomalies, such services are considered as the possible root causes for the frontend anomaly.
+PAL \cite{42_Nguyen2011_PAL} and FChain \cite{43_Nguyen2013_FChain} return the possible root causing services sorted by chronologically ordering the start times of their anomalies.
+The idea is indeed that the earliest anomalies may have propagated from their corresponding services to other services up to the application frontend, hence most probably being the root causes for the observed frontend anomaly.
+
+\subsubsection{{Topology Graph-based Analysis}}
+MicroRCA \cite{04_Wu2020_MicroRCA}, Wu \etal \cite{09_Wu2020_MicroserviceDiagnosisDeepLearning}, Sieve \cite{30_Thalheim2017_Sieve}, and Brand\'on \etal \cite{11_Brandon2020_GraphBasedRootCauseAnalysis} automatically reconstruct the graph modelling the topology of a running application, which they then use to drive the analysis of the possible root causes for observed anomalies.
+{%
+DLA \cite{14_Samir2019_DLA} also exploits a topology graph to identify the possible root causes for observed anomalies, but rather relying on the application operator to provide such graph.
+The above techniques however differ in the methods applied over topology graphs to determine the possible root causes of observed anomalies, either enacting a random walk over topology graph or applying other analysis methods. 
+}
+
+\paragraph{Random Walk}
+MicroRCA \cite{04_Wu2020_MicroRCA} considers the status of the Kubernetes deployment of an application when an anomaly was detected, \viz which containerised service were running, on which nodes they were hosted, and the interactions that occurred among services. 
+MicroRCA \cite{04_Wu2020_MicroRCA} exploits this information to generate a topology graph, whose vertices model the running application services and the node used to host them, and whose oriented arcs model service interactions or service hosting. 
+The topology graph is enriched by also associating each vertex with the time series of KPIs monitored on the corresponding service or node.
+MicroRCA \cite{04_Wu2020_MicroRCA} then extracts an \enquote{anomalous subgraph} from the topology graph.
+The anomalous subgraph is obtained by extracting the vertices corresponding to the services where anomalies were detected, by including the vertices and arcs corresponding the interactions to/from the anomalous services, and by including other vertices and arcs from the topology graph so as to obtain a connected subgraph.
+The anomalous subgraph constitutes the search space where MicroRCA \cite{04_Wu2020_MicroRCA} looks for the services that may have possibly caused the detected anomalies.
+The actual search for the root causing services is enacted by adapting the random walk-based search proposed in MonitorRank \cite{21_Kim2013_RootCauseDetectionSOA} (\Cref{sec:rca:distributed-tracing:topology}) to work with the information modelled by the anomalous subgraph.
+
+Wu \etal \cite{09_Wu2020_MicroserviceDiagnosisDeepLearning} refine MicroRCA \cite{09_Wu2020_MicroserviceDiagnosisDeepLearning} to determine the services' KPIs that may have possibly caused some anomalies to be detected on some services.
+They reuse the topology-driven search proposed by MicroRCA \cite{04_Wu2020_MicroRCA} to determine the services that can have possibly caused the detected anomalies.
+In addition, Wu \etal \cite{09_Wu2020_MicroserviceDiagnosisDeepLearning} process the KPIs monitored on root causing services with the autoencoder \cite{Goodfellow2016_DeepLearningBook}, \viz a neural network that learns to encode input values and to suitably reconstruct them from their encoding.
+Wu \etal \cite{09_Wu2020_MicroserviceDiagnosisDeepLearning} first train an autoencoder with values for such KPIs monitored while no anomaly was affecting the application.
+They then feed the trained autoencoder with the KPI values monitored on the application services when the considered anomalies were detected.
+The KPIs whose values are not well-reconstructed, together with their corresponding services, are considered as the possible root causes for the detected anomalies.
+
+\paragraph{Other Methods}
+Sieve \cite{30_Thalheim2017_Sieve} and Brand\'on \etal \cite{11_Brandon2020_GraphBasedRootCauseAnalysis} monitor network system calls to collect information on service interactions, which they then exploit to automatically reconstruct the topology of a running application.
+When a performance anomaly is observed on the application frontend, Sieve \cite{30_Thalheim2017_Sieve} exploits such topology to drive the analysis of the possible root causes for the observed anomaly.
+It first reduces the dimensionality of to-be-considered KPIs, by removing those whose variance is too small to provide some statistical value, and by clustering the KPIs monitored on each service so as to consider only one representative KPI for each cluster, \viz that closest to the centroid of the cluster.
+Sieve \cite{30_Thalheim2017_Sieve} then explores the possibilities of a service’s representative KPIs to influence other services’ KPIs using a pairwise comparison method: each representative KPI of each service is compared with each representative KPIs of another service. 
+The choice of which services to compare is driven by the application topology: 
+Sieve \cite{30_Thalheim2017_Sieve} indeed enacts a pairwise comparison of KPIs monitored only on interacting services, by exploiting Granger causality tests \cite{Arnold2007_GrangerMethodsTemporalCausalModelling} to determine whether changes in the values monitored for a service's KPI were caused by changes in those monitored for another service's KPI.
+The obtained cause-effect relations are used to only keep the KPIs whose changes were not caused by other services.
+Such KPIs, together with their corresponding services, are considered as the possible root causes for the observed anomaly.
+
+Brand\'on \etal \cite{11_Brandon2020_GraphBasedRootCauseAnalysis} enrich the derived topology by associating each service with its monitored KPIs and with the possibility of marking services as anomalous, by however relying on existing anomaly detection techniques to actually detect anomalous services.
+Whenever the root cause for an anomaly in a service is looked for, the proposed system extracts subgraph modelling the neighbourhood for an anomalous service, \viz it includes the vertices close to that modelling the anomalous service up to a given distance.
+The anomalous subgraph is compared with \enquote{anomaly graph patterns} provided by the application operator, \viz with graphs modelling already troubleshooted anomalies and whose root causing service is known.
+If the similarity between an anomalous subgraph and an anomaly graph pattern is above a given threshold, the corresponding root causing service is included among the possible root causes for the considered anomaly.
+If multiple root causing services are detected, they are ranked by similarity between the corresponding anomaly graph patterns and the anomalous subgraph.
+
+DLA \cite{14_Samir2019_DLA} instead starts from the application topology provided by the application operator, which represents the services forming an application, the containers used to run them, and the VMs where the containers are hosted, together with the communication/hosting relationships between them.
+DLA \cite{14_Samir2019_DLA} transforms the input topology into a Hiearchical Hidden Markov Model (HHMM) \cite{Capp2010_HiddenMarkovModels} by automatically determining the probabilities of an anomaly affecting a service, container, or VM to be caused by the components it relates to, \viz by the components it interacts with, or by those used to host it.
+Such probabilities are automatically determined when an anomaly is detected, by processing the latest monitored KPIs (\viz response time and CPU, memory, and network consumption) with a combination of the Baum-Welch and Viterbi algorithms \cite{Capp2010_HiddenMarkovModels}.
+The possible root causes for the detected anomaly are then determined by exploiting the obtained HHMM to compute the likelihood of the anomaly to be generated by KPI anomalies monitored at container- or VM-level. More precisely, DLA computes the path in the HHMM that has the highest probability to have caused the anomaly observed on a service. 
+The obtained path is then used to elicit the KPIs (and corresponding components) that most probably caused the observed anomaly.
+
+\subsubsection{{Causality Graph-based Analysis}}
+Various existing techniques determine the possible root causes for an anomaly observed on some application service by suitably visiting an automatically derived causality graph \cite{40_Chen2020_CauseInfer,48_Chen2014_CauseInfer,06_Lin2018_Microscope,19_Guan2019_MicroscopeDemo,44_Lin2018_FacGraph,07_Ma2019_MSRank,25_Ma2020_MSRankExtended,08_Ma2020_AutoMAP,29_Wang2018_CloudRanger}.
+The vertices in the causality graph typically model application services, with each oriented arc indicating that the performance of the source service depend on that of the target service.
+Causality graph are typically built by exploiting the well-known PC-algorithm \cite{Spirtes2000_CausationPredictionSearchPCAlgoritm}.
+More precisely, the causality graph is built by starting from a complete and undirected graph, which is refined by dropping and orienting arcs to effectively model causal dependencies among the KPIs monitored on services. 
+The refinement is enacted by pairwise testing conditional independence between the KPIs monitored on different services: if the KPIs monitored on two services result to be conditionally independent, the arc between the services is removed. 
+The remaining arcs are then oriented based on the structure of the graph.
+
+{The existing causality graph-based techniques however differ in the methods applied to process causality graphs to determine the possible root causes for observed anomalies.
+The most common methods are visiting the causality graph through a BFS or a random walk, but there exist also techniques enacting other causality graph-based analysis methods.} 
+
+\paragraph{{BFS}}
+CauseInfer \cite{40_Chen2020_CauseInfer,48_Chen2014_CauseInfer} and Microscope \cite{06_Lin2018_Microscope,19_Guan2019_MicroscopeDemo} determine the possible root causes for the response time anomalies they detect on the frontend of a multi-service application.
+They rely on monitoring agents to collect information on service interactions and their response time, with CauseInfer \cite{40_Chen2020_CauseInfer,48_Chen2014_CauseInfer} installing them in the nodes where the application services run, whilst Microscope \cite{06_Lin2018_Microscope,19_Guan2019_MicroscopeDemo} assuming monitoring agents to be included in the k8s deployment of an application.
+The monitored information is processed with the PC-algorithm to build a causality graph, by exploiting $G^2$ cross-entropy \cite{Spirtes2000_CausationPredictionSearchPCAlgoritm} to test conditional independence between the response times monitored on different services.
+The causality graph is enriched by also including arcs modelling the dependency of each service with the services it invokes.
+On this basis, CauseInfer \cite{40_Chen2020_CauseInfer} and Microscope \cite{06_Lin2018_Microscope,19_Guan2019_MicroscopeDemo} enact root cause inference by recursively visiting the obtained causality graph, starting from the application frontend.
+For each visited service, they consider the services on which it depends: if all such services were not affected by response time anomalies, the currently visited service is considered a possible root cause.
+Otherwise, CauseInfer \cite{40_Chen2020_CauseInfer,48_Chen2014_CauseInfer} and Microscope \cite{06_Lin2018_Microscope,19_Guan2019_MicroscopeDemo} recursively visit all services that were affected by response time anomalies to find the possible root causes for the anomaly observed on the currently visited service.
+To determine anomalies in the response times of visited services, CauseInfer \cite{40_Chen2020_CauseInfer,48_Chen2014_CauseInfer} computes an anomaly score based on the cumulative sum statistics on the history of monitored response times.
+Microscope \cite{06_Lin2018_Microscope,19_Guan2019_MicroscopeDemo} instead exploits standard deviation-based heuristics to determine whether the latest monitored response times were anomalous.
+When all possible root causes have been identified, CauseInfer \cite{40_Chen2020_CauseInfer,48_Chen2014_CauseInfer} ranks them based on their anomaly score, whilst Microscope \cite{06_Lin2018_Microscope,19_Guan2019_MicroscopeDemo} ranks them based on the Pearson correlation between their response times and that of the application frontend.
+
+{%
+Qiu \etal \cite{46_Qiu2020_CausalityMiningKnowledgeGraph} instead consider service-level performance anomalies, \viz they aim at determining the possible root causes for an anomaly observed in the KPIs monitored on any service in an application (rather than on the application frontend).
+To determine such root causes, they exploit the PC-algorithm \cite{Spirtes2000_CausationPredictionSearchPCAlgoritm} to build causality graphs whose vertices correspond to KPIs monitored on application services (rather than to the services themselves), \viz their response times, error count, queries per second, and resource consumption.
+Qiu \etal \cite{46_Qiu2020_CausalityMiningKnowledgeGraph} also enrich the causality graph by including arcs among KPIs also when a dependency between the corresponding services is indicated in the application specification provided as input by the application operator.
+The arcs in the causality graph are also weighted, with each arc's weight indicating how much the source KPI influences the target KPI. 
+The weight of each arc is computed by determining the Pearson correlation between the sequence of significant changes in the source and target KPIs, with significant changes being determined by processing the corresponding time series of monitored KPI values with the solution proposed by Luo \etal \cite{Luo2014_CorrelatingEventsIncidentDiagnosis}.
+The root cause analysis is then enacted with a BFS in the causality graph, starting from the KPI whose anomaly was observed.
+This allows to determine all possible paths outgoing from the anomalous KPI in the causality graph, which all correspond to possible causes for the anomaly observed on such KPI. 
+The paths are then sorted based on the sum of the weights associated to the edges in the path by prioritizing shorter paths in the case of paths whose sum is equivalent. 
+In this way, Qiu \etal \cite{46_Qiu2020_CausalityMiningKnowledgeGraph} prioritize the paths including the KPIs whose changes most probably caused the observed anomaly.
+}
+
+\paragraph{{Random Walk}}
+CloudRanger \cite{29_Wang2018_CloudRanger}, MS-Rank \cite{07_Ma2019_MSRank,25_Ma2020_MSRankExtended}, and AutoMAP \cite{08_Ma2020_AutoMAP} exploit the PC-algorithm to build a causality graph by processing the KPIs monitored on application services.
+As for KPIs, CloudRanger \cite{29_Wang2018_CloudRanger} considers response time, throughput, and power.
+Such KPIs are also considered by MS-Rank \cite{07_Ma2019_MSRank,25_Ma2020_MSRankExtended} and AutoMAP \cite{08_Ma2020_AutoMAP}, in addition to the services' availability and resource consumption.
+CloudRanger \cite{29_Wang2018_CloudRanger}, MS-Rank \cite{07_Ma2019_MSRank,25_Ma2020_MSRankExtended}, and AutoMAP \cite{08_Ma2020_AutoMAP} however differ from CauseInfer \cite{40_Chen2020_CauseInfer} and Microscope \cite{06_Lin2018_Microscope,19_Guan2019_MicroscopeDemo} because they exploit $d$-separation \cite{Cohen2005_DSeparation} (rather than $G^2$ cross entropy) to test conditional independence while building the causality graph with the PC-algorithm \cite{Spirtes2000_CausationPredictionSearchPCAlgoritm}.
+They also differ in the way they enact root cause analysis on obtained causality graphs:
+a causality graph indeed provides the search space where CloudRanger \cite{29_Wang2018_CloudRanger}, MS-Rank \cite{07_Ma2019_MSRank,25_Ma2020_MSRankExtended}, and AutoMAP \cite{08_Ma2020_AutoMAP} perform a random walk to determine the possible root causes for a performance anomaly observed on the application frontend. 
+The random walk starts from the application frontend and it consists of repeating $n$ times (with $n$ equal to the number of services in an application) a random step to visit one of the services in the neighbourhood of the currently visited service, \viz the set including the currently visited service, together with the services that can be reached by traversing forward/backward arcs connected to the currently visited service.
+At each iteration, the probability of visiting a service in the neighbourhood is proportional to the correlation of its KPIs with those of the application frontend. 
+CloudRanger \cite{29_Wang2018_CloudRanger}, MS-Rank \cite{07_Ma2019_MSRank,25_Ma2020_MSRankExtended}, and AutoMAP \cite{08_Ma2020_AutoMAP} rank the application services based on how many times they have been visited, considering that most visited services constitute the most probable root causes for the anomaly observed on the frontend.
+
+{%
+Differently from the above discussed techniques \cite{29_Wang2018_CloudRanger,07_Ma2019_MSRank,08_Ma2020_AutoMAP,25_Ma2020_MSRankExtended}, MicroCause \cite{05_Meng2020_RootCausesMicroservices} determines the root causes of service-level performance anomalies by exploiting the PC-algorithm \cite{Spirtes2000_CausationPredictionSearchPCAlgoritm} to build a causality graph whose vertices correspond to KPIs monitored on application services (rather than to the services themselves).
+In particular, MicroCause \cite{05_Meng2020_RootCausesMicroservices} considers the response time monitored on application services, their error count, queries per second, and resource consumption.
+%
+MicroCause \cite{05_Meng2020_RootCausesMicroservices} then determines the KPIs that experienced anomalies and the time when their anomaly started by exploiting the SPOT algorithm \cite{Siffer2017_SPOTAlgorithm}.
+%This is done by exploiting the SPOT algorithm \cite{Siffer2017_SPOTAlgorithm} to determine anomalous changes in the time series of monitored values for each KPI, and by considering the time of the first anomalous change as the starting time of the anomaly.
+MicroCause \cite{Siffer2017_SPOTAlgorithm} also computes an anomaly score for each KPI, essentially by measuring the magnitude of its anomalous changes.
+This information is then used to drive a random walk over the causality graph to determine the possible root causes for an anomalous KPI being observed on a service.
+MicroCause \cite{05_Meng2020_RootCausesMicroservices} starts from the anomalous KPI and repeats a given number of random steps, each consisting of staying in the currently visited KPI or randomly visiting a KPI that can be reached by traversing forward/backward arcs connected to the currently visited KPI.
+At each step, the probability of visiting a KPI is based on the time and score of its anomaly, if any, and on the correlation of its values with those of the anomalous KPI whose root causes are being searched.
+The KPIs visited during the random walk constitute the set of possible root causes returned by MicroCause \cite{05_Meng2020_RootCausesMicroservices}, ranked based on their anomaly time and score.
+}
+
+\paragraph{{Other Methods}}
+FacGraph \cite{44_Lin2018_FacGraph} exploits the PC-algorithm \cite{Spirtes2000_CausationPredictionSearchPCAlgoritm} with $d$-separation \cite{Cohen2005_DSeparation} to build causality graphs, whilst also assuming the same frontend anomaly to be observed in multiple time intervals.
+It indeed exploits the PC-algorithm to build multiple causality graphs, each built on the latency and throughput monitored on application services during the different time intervals when the frontend anomaly was observed. 
+FacGraph \cite{44_Lin2018_FacGraph} then searches for anomaly propagation subgraphs in the obtained causality graphs, with each subgraph having a tree-like structure and being rooted in the application frontend. 
+The idea is that an anomaly originates in some application services and propagates from such services to the application frontend. 
+All identified subgraphs are assigned a score based on the frequency with which they appear in the causality graphs. 
+Only the subgraphs whose score is higher than a given threshold are kept, as they are considered as possible explanations for the performance anomaly observed on the application frontend.
+FacGraph \cite{44_Lin2018_FacGraph} then returns the set of services corresponding to leaves in the tree-like structure of each of the kept subgraphs, which constitute the possible root causes for the observed frontend anomaly.
+
+{%
+Differently from FacGraph \cite{44_Lin2018_FacGraph}, LOUD \cite{13_Mariani2018_LocalizingFaultsCloudSystems} determines the root causes of service-level performance anomalies by building causality graphs whose vertices correspond to KPIs monitored on application services (rather than to the services themselves).
+In addition, LOUD \cite{13_Mariani2018_LocalizingFaultsCloudSystems} is \enquote{KPI-agnostic}, as it works with any set of KPIs for monitored on the services forming an application.
+LOUD \cite{13_Mariani2018_LocalizingFaultsCloudSystems} relies on the IBM ITOA-PI \cite{IBM_ITOA_PI} to detect anomalous KPIs monitored on the services forming an application (\Cref{sec:detection:monitoring:unsupervised-learning}), and to automatically determine the possible root causes for such anomalies.
+The IBM ITOA-PI \cite{IBM_ITOA_PI} is indeed exploited to automatically build a causality graph and to process such graph.
+This is done under the assumption that the anomalous KPIs related to a detected anomaly are highly correlated and form a connected subgraph of the causality graph.
+In particular, LOUD assumes that the anomalous behaviour of the service whose KPIs are anomalous is likely to result in the anomalous behaviour of services it interacts with, either directly or through some other intermediate services.
+Based on this assumption, LOUD exploits graph centrality indices to identify the anomalous KPIs that best characterize the root cause of a detected performance anomaly: the KPIs with the highest centrality scores likely correspond to the services that are responsible for the detected anomaly.
+}
+
+\subsection{Discussion}
+\label{sec:rca:discussion}
+\Cref{tab:rca} recaps the surveyed root cause analysis techniques by distinguishing their classes, \viz whether they are log-based, distributed tracing-based, or monitoring-based, as well as the method they apply to determine the possible root causes for an observed anomaly.
+The table classifies the surveyed techniques based on whether they identify the possible root causes for functional or performance anomalies, observed at application-level (\eg on the application frontend) or on specific services in the application, as well as on whether they are already integrated with any of the anomaly detection techniques surveyed in \Cref{sec:detection}.
+\Cref{tab:rca} also provides some insights on the artifacts that must be provided to the surveyed root cause analysis techniques, as input needed to actually search for possible root causes of observed anomalies, and it recaps the root causes they automatically identify.
+In the latter perspective, the table distinguishes whether the surveyed techniques identify the services, events, or KPIs that possibly caused an observed anomaly, and whether the identified root causes are ranked, with higher ranks assigned to those that have higher probability to have caused the observed anomaly.
+
+Taking \Cref{tab:rca} as a reference, we hereafter summarise the surveyed techniques for identifying the possible root causes for detected anomalies (\Cref{sec:rca:discussion:summary}).
+We also discuss them under three different perspectives, \viz finding a suitable compromise between the identified root causes and setup costs (\Cref{sec:rca:discussion:root-causes-costs}), their accuracy (\Cref{sec:rca:discussion:false-positives-negatives}), and the need for explainability and countermeasures (\Cref{sec:rca:discussion:explainability-countermeasures}). %\footnote{We focus on qualitatively comparing the surveyed root cause analysis techniques. A quantitative comparison (\eg of their accuracy and performance) is outside of the scope of this paper and left for future work  (\Cref{sec:conclusions}).}
+
+\subsubsection{Summary}
+\label{sec:rca:discussion:summary}
+The surveyed root cause analysis techniques allow to determine the possible root causes for anomalies observed on multi-service applications.
+In some cases, the root cause analysis techniques are enacted in pipeline with anomaly detection.
+Whenever an anomaly is detected to affect the whole application or one of its services, a root cause analysis is automatically started to determine the possible root causes for such an anomaly  \cite{16_Liu2020_TraceAnomaly,49_Shan2019_epsilonDiagnosis,20_Wang2020_RootCauseMetricLocation,04_Wu2020_MicroRCA,09_Wu2020_MicroserviceDiagnosisDeepLearning,14_Samir2019_DLA,40_Chen2020_CauseInfer,48_Chen2014_CauseInfer,06_Lin2018_Microscope,19_Guan2019_MicroscopeDemo,29_Wang2018_CloudRanger,13_Mariani2018_LocalizingFaultsCloudSystems}.
+{%
+In this case, the pipeline of techniques can be used as-is to automatically detect anomalies and their possible root causes.
+}
+The other techniques instead determine the possible root causes for anomalies observed with external monitoring tools, by end users, or by application operators \cite{10_Aggarwal2020_FaultsGoldenSignals,01_Zhou2021_FaultAnalysisDebuggingMicroservices,45_Guo2020_GMTA,41_Mi2013_PerformanceDiagnosisCloud,21_Kim2013_RootCauseDetectionSOA,47_Liu2021_MicroHECL,42_Nguyen2011_PAL,43_Nguyen2013_FChain,30_Thalheim2017_Sieve,11_Brandon2020_GraphBasedRootCauseAnalysis,07_Ma2019_MSRank,25_Ma2020_MSRankExtended,08_Ma2020_AutoMAP,44_Lin2018_FacGraph,05_Meng2020_RootCausesMicroservices,46_Qiu2020_CausalityMiningKnowledgeGraph}.
+{%
+By combining the information on the type and grain of detected/analysed anomalies available in \Cref{tab:detection,tab:rca}, application operators can determine which root cause analysis technique can be used in pipeline with a given anomaly detection technique, after applying the necessary integration to both techniques to let them successfully interoperate.
+}
+
+%\input{tab/rca}
+\input{tab/trial_rca}
+
+Whichever is the way of detecting anomalies, their root cause analysis is typically enacted on a graph modelling the multi-service application where anomalies have been observed (\Cref{tab:rca}).
+A possibility is to visit a graph modelling the application topology, which can be automatically reconstructed by monitoring service interactions \cite{04_Wu2020_MicroRCA,09_Wu2020_MicroserviceDiagnosisDeepLearning,30_Thalheim2017_Sieve,11_Brandon2020_GraphBasedRootCauseAnalysis} or from distributed traces  \cite{21_Kim2013_RootCauseDetectionSOA,47_Liu2021_MicroHECL}, or which must be provided as input by the application operator \cite{14_Samir2019_DLA}.
+The most common, graph-based approach is however reconstructing a causality graph from the application logs \cite{10_Aggarwal2020_FaultsGoldenSignals} or from the KPIs monitored on the services forming an application \cite{40_Chen2020_CauseInfer,48_Chen2014_CauseInfer,06_Lin2018_Microscope,19_Guan2019_MicroscopeDemo,29_Wang2018_CloudRanger,07_Ma2019_MSRank,25_Ma2020_MSRankExtended,08_Ma2020_AutoMAP,44_Lin2018_FacGraph,05_Meng2020_RootCausesMicroservices,46_Qiu2020_CausalityMiningKnowledgeGraph,13_Mariani2018_LocalizingFaultsCloudSystems}, typically to model how application services influence each other.
+The vertices in a causality graph either model the application services \cite{40_Chen2020_CauseInfer,48_Chen2014_CauseInfer,06_Lin2018_Microscope,19_Guan2019_MicroscopeDemo,29_Wang2018_CloudRanger,07_Ma2019_MSRank,25_Ma2020_MSRankExtended,08_Ma2020_AutoMAP,44_Lin2018_FacGraph} or the KPIs \cite{05_Meng2020_RootCausesMicroservices,46_Qiu2020_CausalityMiningKnowledgeGraph,13_Mariani2018_LocalizingFaultsCloudSystems} monitored on such services, whereas each arc indicates that the performance of the target service/KPI depends on that of the source service/KPI.
+Causality graphs are always obtained (but for the case of LOUD \cite{13_Mariani2018_LocalizingFaultsCloudSystems}) by applying the PC-algorithm \cite{Spirtes2000_CausationPredictionSearchPCAlgoritm} to the time series of logged events/monitored KPIs, as such algorithm is known to allow determining causal relationships in time series, \viz by identifying whether the values in a time series can be used to predict those of another time series.
+
+The search can then be performed by visiting the topology/causality graph, starting from the application frontend in the case of application-level anomalies \cite{10_Aggarwal2020_FaultsGoldenSignals,06_Lin2018_Microscope,19_Guan2019_MicroscopeDemo,40_Chen2020_CauseInfer,48_Chen2014_CauseInfer,29_Wang2018_CloudRanger,07_Ma2019_MSRank,25_Ma2020_MSRankExtended,08_Ma2020_AutoMAP,44_Lin2018_FacGraph,21_Kim2013_RootCauseDetectionSOA,30_Thalheim2017_Sieve} or from the KPI/service where the anomaly was actually observed \cite{05_Meng2020_RootCausesMicroservices,46_Qiu2020_CausalityMiningKnowledgeGraph,13_Mariani2018_LocalizingFaultsCloudSystems,47_Liu2021_MicroHECL,04_Wu2020_MicroRCA,09_Wu2020_MicroserviceDiagnosisDeepLearning}.
+Different methods are then applied to visit the graph, the most intuitive being a BFS over the graph to identify all possible paths that could justify the observed anomaly \cite{46_Qiu2020_CausalityMiningKnowledgeGraph}.
+To reduce the paths to be visited, the BFS is often stopped when no anomaly was affecting any of the services that can be reached from the currently visited service, which is hence considered a possible root cause for the observed anomaly \cite{47_Liu2021_MicroHECL,40_Chen2020_CauseInfer,48_Chen2014_CauseInfer,06_Lin2018_Microscope,19_Guan2019_MicroscopeDemo}.
+The most common method is however that first proposed in MonitorRank \cite{21_Kim2013_RootCauseDetectionSOA} and then reused by various techniques \cite{04_Wu2020_MicroRCA,09_Wu2020_MicroserviceDiagnosisDeepLearning,29_Wang2018_CloudRanger,07_Ma2019_MSRank,25_Ma2020_MSRankExtended,08_Ma2020_AutoMAP,05_Meng2020_RootCausesMicroservices}.
+In this case, the graph is visited through a random walk, where the probability of visiting a service with a random step is proportional to the correlation between the performances of such service and of the service where the anomaly was observed. 
+Rather than returning all possible root causes (as per what modelled by the graph), random walk-based techniques return a ranked list of possible root causes, under the assumption that the more a service gets visited through the random walk, the more is probable that it can have caused the observed anomaly \cite{21_Kim2013_RootCauseDetectionSOA,07_Ma2019_MSRank,25_Ma2020_MSRankExtended}.
+
+Other graph-based root cause analysis techniques anyhow exist, either using the application topology to drive the pairwise comparison of monitored performances \cite{30_Thalheim2017_Sieve}, or based on processing the whole topology/causality graph to determine the possible root causes for an observed anomaly
+\cite{14_Samir2019_DLA,11_Brandon2020_GraphBasedRootCauseAnalysis,13_Mariani2018_LocalizingFaultsCloudSystems}.
+As for processing the application topology, the alternatives are twofold, \viz enacting pattern matching to reconduct the observed anomaly to some already troubleshooted situation \cite{11_Brandon2020_GraphBasedRootCauseAnalysis}, or transforming the topology into a probabilistic model to elict the most probable root causes for the observed anomaly \cite{14_Samir2019_DLA}.
+In the case of causality graph, instead, graph processing corresponds to computing graph centrality indexes to rank the KPIs monitored on services, assuming that highest ranked KPIs best characterise the observed anomaly \cite{13_Mariani2018_LocalizingFaultsCloudSystems}. 
+
+Quite different methods are trace comparison and {direct KPI correlation}. 
+In the case of trace comparison, the idea is to provide application operators with a graphical support to visualise and compare traces, in such a way that they can troubleshoot the traces corresponding to anomalous runs of an application \cite{01_Zhou2021_FaultAnalysisDebuggingMicroservices,45_Guo2020_GMTA}.
+{Direct KPI correlation} is instead based the idea here is that an anomaly observed on a service can be determined by the co-occurrence of other anomalies on other services.
+The proposed method is hence to {directly} process the traces produced by application services \cite{41_Mi2013_PerformanceDiagnosisCloud,16_Liu2020_TraceAnomaly} or their monitored KPIs \cite{49_Shan2019_epsilonDiagnosis,20_Wang2020_RootCauseMetricLocation,42_Nguyen2011_PAL,43_Nguyen2013_FChain} to detect co-occurring anomalies, \viz occurring in a time interval including the time when the initially considered anomaly was observed.
+Such co-occurring anomalies are considered as the possible root causes for the observed anomaly.
+
+\subsubsection{Identified Root Causes vs. Setup Costs}
+\label{sec:rca:discussion:root-causes-costs}
+The surveyed techniques determine possible root causes for anomalies of different types and granularity, by requiring different types of artifacts (\Cref{tab:detection}).
+Independently from the applied method, trace-based and monitoring-based techniques reach a deeper level of detail for considered anomalies and identified root causes, if compared with the only available log-based technique.
+The log-based technique by Aggarwal \etal \cite{10_Aggarwal2020_FaultsGoldenSignals} determines a root causing service, which most probably caused the functional anomaly observed on the frontend of an application.
+The available trace-based and monitoring-based techniques instead determine multiple possible root causes for application-level anomalies \cite{01_Zhou2021_FaultAnalysisDebuggingMicroservices,45_Guo2020_GMTA,41_Mi2013_PerformanceDiagnosisCloud,16_Liu2020_TraceAnomaly,21_Kim2013_RootCauseDetectionSOA,49_Shan2019_epsilonDiagnosis,42_Nguyen2011_PAL,43_Nguyen2013_FChain,30_Thalheim2017_Sieve,40_Chen2020_CauseInfer,48_Chen2014_CauseInfer,06_Lin2018_Microscope,19_Guan2019_MicroscopeDemo,29_Wang2018_CloudRanger,07_Ma2019_MSRank,25_Ma2020_MSRankExtended,08_Ma2020_AutoMAP,44_Lin2018_FacGraph} or service-level anomalies \cite{47_Liu2021_MicroHECL,20_Wang2020_RootCauseMetricLocation,04_Wu2020_MicroRCA,09_Wu2020_MicroserviceDiagnosisDeepLearning,11_Brandon2020_GraphBasedRootCauseAnalysis,14_Samir2019_DLA,05_Meng2020_RootCausesMicroservices,46_Qiu2020_CausalityMiningKnowledgeGraph,13_Mariani2018_LocalizingFaultsCloudSystems}.
+They can also provide more details on the possible root causes for an observed anomaly, from the application services that may have caused it \cite{45_Guo2020_GMTA,41_Mi2013_PerformanceDiagnosisCloud,16_Liu2020_TraceAnomaly,21_Kim2013_RootCauseDetectionSOA,47_Liu2021_MicroHECL,42_Nguyen2011_PAL,43_Nguyen2013_FChain,04_Wu2020_MicroRCA,11_Brandon2020_GraphBasedRootCauseAnalysis,40_Chen2020_CauseInfer,48_Chen2014_CauseInfer,29_Wang2018_CloudRanger,07_Ma2019_MSRank,25_Ma2020_MSRankExtended,08_Ma2020_AutoMAP,44_Lin2018_FacGraph} up to the actual events \cite{01_Zhou2021_FaultAnalysisDebuggingMicroservices} or KPIs monitored on such services \cite{49_Shan2019_epsilonDiagnosis,20_Wang2020_RootCauseMetricLocation,09_Wu2020_MicroserviceDiagnosisDeepLearning,30_Thalheim2017_Sieve,14_Samir2019_DLA,05_Meng2020_RootCausesMicroservices,46_Qiu2020_CausalityMiningKnowledgeGraph,13_Mariani2018_LocalizingFaultsCloudSystems}.
+To help application operators in troubleshooting the multiple root causes identified for an observed anomaly, some techniques also rank the possible root causing services \cite{41_Mi2013_PerformanceDiagnosisCloud,21_Kim2013_RootCauseDetectionSOA,47_Liu2021_MicroHECL,42_Nguyen2011_PAL,43_Nguyen2013_FChain,11_Brandon2020_GraphBasedRootCauseAnalysis,40_Chen2020_CauseInfer,48_Chen2014_CauseInfer,06_Lin2018_Microscope,19_Guan2019_MicroscopeDemo,29_Wang2018_CloudRanger,07_Ma2019_MSRank,25_Ma2020_MSRankExtended,08_Ma2020_AutoMAP,44_Lin2018_FacGraph} or KPIs \cite{05_Meng2020_RootCausesMicroservices,46_Qiu2020_CausalityMiningKnowledgeGraph,13_Mariani2018_LocalizingFaultsCloudSystems}.
+The idea is that highest ranked root causes are more likely to have caused an observed anomaly, hence helping application operators to earlier identify the actual root causes for the observed anomaly, often saving them from troubleshooting all possible root causes.
+
+At the same time, the log-based root cause analysis proposed by Aggarwal \etal \cite{10_Aggarwal2020_FaultsGoldenSignals} directly works with the event logs produced by application services, by inferring causal relationships among logged events based on an application specification provided by the application operator. 
+The log-based root cause analysis technique proposed by Aggarwal \etal \cite{10_Aggarwal2020_FaultsGoldenSignals} hence assumes that application services log events, which is typically the case, whilst not requiring any further application instrumentation.
+As we already discussed in \Cref{sec:detection:discussion:type-granularity-costs}, distributed tracing-based and monitoring-based techniques instead require applications to be instrumented to feature distributed tracing or to be deployed together with agents monitoring KPIs on their services, respectively.
+The surveyed techniques also often rely on specific technologies, such as k8s \cite{49_Shan2019_epsilonDiagnosis,04_Wu2020_MicroRCA,09_Wu2020_MicroserviceDiagnosisDeepLearning,14_Samir2019_DLA}, assume the deployment of an application to be such that each service is deployed on a different VM \cite{42_Nguyen2011_PAL,43_Nguyen2013_FChain}, or require the application operator to provide additional artifacts, \eg a specification of the application topology \cite{10_Aggarwal2020_FaultsGoldenSignals,14_Samir2019_DLA,46_Qiu2020_CausalityMiningKnowledgeGraph}, known anomaly patterns \cite{11_Brandon2020_GraphBasedRootCauseAnalysis}, or workload generators \cite{04_Wu2020_MicroRCA,09_Wu2020_MicroserviceDiagnosisDeepLearning,13_Mariani2018_LocalizingFaultsCloudSystems}.
+
+The surveyed root cause analysis techniques hence differ in the type and granularity of observed anomalies they can explain, in the root causes they identify, and in their applicability to a multi-service application as it is.
+In particular, whilst some techniques can achieve a deeper level of detail in identified root causes and rank them based on their probability to have caused an observed anomaly, this is paid with the cost for setting them up to work with a given application, \viz to suitably instrument the application or its deployment, or to provide the needed artifacts.
+The choice of which technique to use for enacting root cause analysis on a given application hence consists of finding a suitable trade-off between the level and ranking of identified root causes and the cost for setting up such technique to work with the given application. 
+We believe that the classification provided in this paper can provide a first support for application operators wishing to choose the root cause analysis technique most suited to their needs.
+
+\subsubsection{Accuracy of Enacted Root Cause Analyses}
+\label{sec:rca:discussion:accuracy}
+\label{sec:rca:discussion:false-positives-negatives}
+As for the case of anomaly detection (\Cref{sec:detection:discussion:adaptability}), false positives and false negatives can affect the accuracy of root cause analysis techniques.
+False positives here correspond to the services or KPIs that are identified as possible root causes for an observed anomaly, even if they actually have nothing in common with such anomaly.
+The only situation in which no false positive is returned by a root cause analysis technique is when Aggarwal \etal \cite{10_Aggarwal2020_FaultsGoldenSignals} returns the service that is actually causing an observed anomaly.
+In all other cases, false positives are there: if Aggarwal \etal \cite{10_Aggarwal2020_FaultsGoldenSignals} returns a service different from that actually causing an observed anomaly, the returned service is a false positive.
+The other surveyed techniques instead return multiple possible root causes, often including various false positives.
+Such false positives put more effort on the application operator, who is required to troubleshoot the corresponding services, even if they actually not caused the anomaly whose root causes are being searched.
+
+At the same time, returning multiple possible root causes reduces the risk for false negatives, \viz for the actual root causes of an observed anomaly to not be amongst those determined by the enacted root cause analysis.
+The impact of false negatives is even more severe than that of false positives, which puts more effort on the application operator \cite{46_Qiu2020_CausalityMiningKnowledgeGraph}.
+\upd{The main purpose of root cause analysis is indeed to automatically identify the actual root causes for an observed anomaly, and missing such actual root causes (as in the case of false negatives) may make the price to enact root cause analysis not worthy to be paid.}
+This is the main reason why most of the surveyed techniques opt to return multiple possible root causes, amongst which the actual one is likely to be.
+As we already highlighted in \Cref{sec:rca:discussion:summary}, to reduce the effort to be put on the application operator to identify the actual root cause among the returned ones, some techniques also rank them based on their likelihood to have caused the observed anomaly \cite{21_Kim2013_RootCauseDetectionSOA}.
+
+False negatives are however always around the corner.
+The common driver for automatically identifying root causes with the surveyed techniques is correlation, which is used to correlate offline detected anomalies or to drive the search within the application topology or in a causality graph.
+It is however known that correlation is however not ensuring causation \cite{Calude2017_SpuriousCorrelations}, hence meaning that the actual root cause for an anomaly observed in a service may not be amongst the services whose behaviour is highly correlated with that of the anomalous service, but rather in some other service.
+Spurious correlations impact more on those techniques determining causalities by relying on correlation only, \eg to determine which is the root cause among co-occurring anomalies, or to build a causality graph.
+One may hence think that topology-driven techniques are immune to spurious correlations, as they rely on the explicit modelling of the interconnections between the services forming an application and their hosting nodes. 
+However, those techniques enacting correlation-guided random walks over the topology of an application are still prone to spurious correlations.
+At the same time, even if a technique enacts an extensive search over the application topology and considers all modelled dependencies, it may miss the actual root cause in some cases.
+For instance, if a topology is just representing service interactions, a technique analysing such topology may miss the case of performance anomalies affecting a service because other services hosted on the same node are consuming all computing resources.
+It may also be the case that ---independently from the applied method--- a root cause technique actually determines the root cause for an observed anomaly, but the latter is excluded from those returned because its estimated likelihood to have caused the observed anomaly is below a given threshold.
+
+All the surveyed techniques are hence subject to both false positives and false negatives, as they are actually inherent to the root cause analysis problem itself.
+False positives/negatives are indeed a price to pay when enacting root cause analysis.
+A quantitative comparison of the accuracy of the different techniques on given applications in given contexts would further help application operators in this direction, and it will complement the information in this survey in supporting application in choosing the root cause analysis techniques best suited to their needs.
+Such a quantitative comparison is however outside of the scope of this survey and left for future work.
+
+\subsubsection{Explainability and Countermeasures}
+\label{sec:rca:discussion:explainability-countermeasures}
+The problem of false positives/negatives amongst identified root causes can be mitigated by addressing one of the open challenges in root cause analysis: explainability.
+Identified root causes should be associated with explanations on why they may have caused an observed anomaly, as well as why they are ranked higher than other possible root causes, in the case of techniques returning a ranking of possible root causes. 
+Such information would indeed help application operators in identifying the false positives to get excluded, or in considering the possible root causes in some order different from that given by the ranking, if they believe that their associated explanations are more likely to have caused an observed anomaly.
+
+In addition, as we discussed in \Cref{sec:rca:discussion:false-positives-negatives}, false negatives may be due to the fact that a root cause analysis technique excluded possible root causes if their likelihood to have caused an observed anomaly was below a given threshold.
+If returned root causes would be associated with explanations on why they were considered such, we may avoid cutting the returned set of possible root causes, hence reducing the risk of techniques to consider as false negatives those root causes that they actually determined.
+Again, application operators could exploit provided explanations to directly exclude the root causes corresponding to false positives.
+
+Recommending countermeasures to be enacted to avoid the identified root causes to cause again the correspondingly observed anomalies is also an open challenge.
+All the surveyed techniques allow to determine possible root causes for an observed anomaly, \viz the set of services that may have caused the anomaly, or the trace events or KPIs collected on such services. 
+The possible root causes are returned to the application operator, who is in charge of further troubleshooting the potentially culprit services to determine whether/why they actually caused the observed anomaly.
+At the same time, the possible root causes are identified based on data collected on the services forming an application, which is processed only to enact root cause analysis.
+Such data could however be further processed to further support the application operator, \eg to automatically extract possible countermeasures to avoid it to cause the observed anomaly \cite{Brogi2020_FailureCausalities}.
+For instance, if a service logged an error event that caused a cascade of errors reaching the service where the anomaly was observed, the root cause analysis technique could further process the error logs to suggest how to avoid such error propagation to happen again, \eg by introducing circuit breakers or bulkheads \cite{Richardson2018_MicroservicesPatterns}.
+If a service was responding too slowly and caused some performance anomaly in another service, this information can be used to train machine learning models to predict similar performance degradations in the root causing service, which could then be used to preemptively scale such service and avoid the performance degradation to again propagate in future runs of an application.
+The above are just two out of many possible examples, deserving further investigation and opening new research directions. 

@@ -1,0 +1,257 @@
+\begin{table}[tp]
+\caption{Classification of root cause analysis techniques, based on their \textit{class} (\viz \textsf{L}, \textsf{DT}, and \textsf{M} for log-based, distributed tracing-based, and monitoring-based techniques, respectively), the enacted \textit{search}, the \textit{type} (\viz \textsf{F} and \textsf{P} for functional and performance anomalies, respectively) and \textit{grain} of explained anomalies (\viz \textsf{A} and \textsf{S} for application-level and service-level anomalies, respectively), the identified \textit{root causes}, and the \textit{artifacts} they need to run. The techniques marked with \enquote{${}^\star$} automatically enact root cause analysis for anomalies they automatically detect on running applications (as described in \Cref{sec:detection}). }
+\label{tab:rca}
+\begin{footnotesize}
+\begin{tabular}{%
+    >{\centering\arraybackslash}m{.18\textwidth}%
+    @{\ }
+    >{\centering\arraybackslash}m{.05\textwidth}%
+    @{\ }
+    >{\centering\arraybackslash}m{.16\textwidth}%
+    @{\ }
+    >{\centering\arraybackslash}m{.05\textwidth}%
+    @{\,}
+    >{\centering\arraybackslash}m{.06\textwidth}%
+    @{\ }
+    >{\centering\arraybackslash}m{.18\textwidth}%
+    @{\ }
+    >{\centering\arraybackslash}m{.25\textwidth}%
+}
+    \thickline
+    % study
+        &
+        &
+        & \multicolumn{2}{c}{\textbf{Anomaly}}
+        &
+        &
+        \\
+    %study
+        & \textbf{Class} 
+        & \textbf{Analysis Method}
+        & \textbf{Type}
+        & \textbf{Gran.}
+        & \textbf{Root Causes}
+        & \textbf{Needed Artifacts}
+        \\ 
+    \thickline
+    Aggarwal \etal \cite{10_Aggarwal2020_FaultsGoldenSignals}
+        & \textsf{L}
+        & \cellcolor[HTML]{eeeeee} \cellcolor[HTML]{eeeeee} causality graph
+        & \textsf{F}
+        & \textsf{A}
+        & service
+        & online produced logs, application specification
+        \\
+    \thinline
+    Zhou \etal \cite{01_Zhou2021_FaultAnalysisDebuggingMicroservices}
+        & \textsf{DT}
+        & \cellcolor[HTML]{dddddd} trace comparison
+        & \textsf{F}, \textsf{P}
+        & \textsf{A}
+        & set of trace events 
+        & reference traces, online produced traces
+        \\
+    GMTA \cite{45_Guo2020_GMTA}
+        & \textsf{DT}
+        & \cellcolor[HTML]{dddddd} trace comparison
+        & \textsf{F}, \textsf{P}
+        & \textsf{A}
+        & set of services
+        & reference traces, online produced traces
+        \\
+    
+    CloudDiag \cite{41_Mi2013_PerformanceDiagnosisCloud}
+        & \textsf{DT}
+        & \cellcolor[HTML]{cccccc} offline anomaly detection
+        & \textsf{P}
+        & \textsf{A}
+        & ranked list of services
+        & target application deployment
+        \\
+    
+    ${}^\star$TraceAnomaly \cite{16_Liu2020_TraceAnomaly}
+        & \textsf{DT}
+        & \cellcolor[HTML]{cccccc} offline anomaly detection
+        & \textsf{F}, \textsf{P}
+        & \textsf{A}
+        & set of services
+        & training traces, online produced traces
+        \\
+    MonitorRank \cite{21_Kim2013_RootCauseDetectionSOA}
+        & \textsf{DT}
+        & \cellcolor[HTML]{bbbbbb} topology-driven
+        & \textsf{P}
+        & \textsf{A}
+        & ranked list of services
+        & target application deployment
+        \\
+    MicroHECL \cite{47_Liu2021_MicroHECL}
+        & \textsf{DT}
+        & \cellcolor[HTML]{bbbbbb} topology-driven
+        & \textsf{P}
+        & \textsf{S}
+        & ranked list of services
+        & training traces, online produced traces
+        \\
+    \thinline
+    ${}^\star \epsilon$-diagnosis \cite{49_Shan2019_epsilonDiagnosis}
+        & \textsf{M}
+        & \cellcolor[HTML]{cccccc} offline anomaly detection
+        & \textsf{P}
+        & \textsf{A}
+        & set of KPIs
+        & k8s deployment
+        \\
+    
+    ${}^\star$Wang \etal \cite{20_Wang2020_RootCauseMetricLocation}
+        & \textsf{M}
+        & \cellcolor[HTML]{cccccc} offline anomaly detection
+        & \textsf{F}, \textsf{P}
+        & \textsf{S}
+        & set of KPIs
+        & online produced logs, monitored KPIs
+        \\
+    
+    PAL \cite{42_Nguyen2011_PAL}
+        & \textsf{M}
+        & \cellcolor[HTML]{cccccc} offline anomaly detection
+        & \textsf{P}
+        & \textsf{A}
+        & ranked list of services
+        & target application deployment 
+        \\
+    
+    FChain \cite{43_Nguyen2013_FChain}
+        & \textsf{M}
+        & \cellcolor[HTML]{cccccc} offline anomaly detection
+        & \textsf{P}
+        & \textsf{A}
+        & ranked list of services
+        & target application deployment 
+        \\
+    ${}^\star$MicroRCA \cite{04_Wu2020_MicroRCA}
+        & \textsf{M}
+        & \cellcolor[HTML]{bbbbbb} topology-driven
+        & \textsf{P}
+        & \textsf{S}
+        & set of services
+        & k8s deployment, workload generator
+        \\
+    ${}^\star$Wu \etal \cite{09_Wu2020_MicroserviceDiagnosisDeepLearning}
+        & \textsf{M}
+        & \cellcolor[HTML]{bbbbbb} topology-driven
+        & \textsf{P}
+        & \textsf{S}
+        & set of KPIs
+        & k8s deployment, workload generator
+        \\
+    Sieve \cite{30_Thalheim2017_Sieve}
+        & \textsf{M}
+        & \cellcolor[HTML]{bbbbbb} topology-driven
+        & \textsf{P}
+        & \textsf{A}
+        & set of KPIs
+        & target application deployment
+        \\
+    Brand\'on \etal \cite{11_Brandon2020_GraphBasedRootCauseAnalysis}
+        & \textsf{M}
+        & \cellcolor[HTML]{bbbbbb} topology-driven
+        & \textsf{F}, \textsf{P}
+        & \textsf{S}
+        & ranked list of services
+        & target application deployment, anomaly patterns
+        \\
+    ${}^\star$DLA \cite{14_Samir2019_DLA}
+        & \textsf{M}
+        & \cellcolor[HTML]{bbbbbb} topology-driven
+        & \textsf{P}
+        & \textsf{S}
+        & set of KPIs
+        & k8s deployment, application specification
+        \\
+    
+    ${}^\star$CauseInfer \cite{40_Chen2020_CauseInfer,48_Chen2014_CauseInfer}
+        & \textsf{M}
+        & \cellcolor[HTML]{eeeeee} causality graph
+        & \textsf{P}
+        & \textsf{A}
+        & ranked list of services
+        & target application deployment
+        \\
+    
+    ${}^\star$Microscope \cite{06_Lin2018_Microscope,19_Guan2019_MicroscopeDemo}
+        & \textsf{M}
+        & \cellcolor[HTML]{eeeeee} causality graph
+        & \textsf{P}
+        & \textsf{A}
+        & ranked list of services
+        & target application deployment
+        \\
+    
+    ${}^\star$CloudRanger \cite{29_Wang2018_CloudRanger}
+        & \textsf{M}
+        & \cellcolor[HTML]{eeeeee} causality graph
+        & \textsf{P}
+        & \textsf{A}
+        & ranked list of services
+        & target application deployment, historically monitored KPIs
+        \\
+    
+    MS-Rank \cite{07_Ma2019_MSRank,25_Ma2020_MSRankExtended}
+        & \textsf{M}
+        & \cellcolor[HTML]{eeeeee} causality graph
+        & \textsf{P}
+        & \textsf{A}
+        & ranked list of services
+        & monitored KPIs
+        \\
+    
+    
+    AutoMAP \cite{08_Ma2020_AutoMAP}
+        & \textsf{M}
+        & \cellcolor[HTML]{eeeeee} causality graph
+        & \textsf{P}
+        & \textsf{A}
+        & ranked list of services
+        & monitored KPIs
+        \\
+    
+    FacGraph \cite{44_Lin2018_FacGraph}
+        & \textsf{M}
+        & \cellcolor[HTML]{eeeeee} causality graph
+        & \textsf{P}
+        & \textsf{A}
+        & ranked list of services
+        & monitored KPIs
+        \\
+    
+    MicroCause \cite{05_Meng2020_RootCausesMicroservices}
+        & \textsf{M}
+        & \cellcolor[HTML]{eeeeee} causality graph
+        & \textsf{P}
+        & \textsf{S}
+        & ranked list of KPIs
+        & monitored KPIs
+        \\
+    
+    Qiu \etal \cite{46_Qiu2020_CausalityMiningKnowledgeGraph}
+        & \textsf{M}
+        & \cellcolor[HTML]{eeeeee} causality graph
+        & \textsf{P}
+        & \textsf{S}
+        & ranked list of KPIs
+        & monitored KPIs, application specification
+        \\
+    
+    ${}^\star$LOUD \cite{13_Mariani2018_LocalizingFaultsCloudSystems}
+        & \textsf{M}
+        & \cellcolor[HTML]{eeeeee} causality graph
+        & \textsf{P}
+        & \textsf{S}
+        & ranked list of KPIs
+        & target application deployment, workload generator
+        \\
+    \thickline
+\end{tabular}
+\end{footnotesize}
+\end{table}

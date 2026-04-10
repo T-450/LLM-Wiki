@@ -1,0 +1,61 @@
+Performance anomaly is detected based on the anomalous increase of response time (RT).
+The challenge here is how to distinguish anomalous fluctuations from normal fluctuations. 
+Figure~\ref{fig:RT-2-hour} and Figure~\ref{fig:RT-week}  illustrate the fluctuations of response time in two hours and in one week respectively.
+It can be seen that there are periodic fluctuations in different periods of a day and different days of a week.
+If we use intuitive rules like 3-sigma, it is likely that some of these periodic fluctuations will be recognized as performance anomalies.
+To recognize anomalous fluctuations such as the anomalous point in Figure~\ref{fig:RT-2-hour}, we need to consider not only the quality metrics of the current period but also those of the same period of the previous day and the same day of the previous week.
+Moreover, in historical data the response time is in normal fluctuations most of the time, and there are only a few anomalous fluctuations.
+
+Based on the characteristics of RT, we choose to use OC-SVM (one class support vector machine) to train a prediction model for anomalous RT fluctuations.
+OC-SVM~\cite{ocsvm} uses only the information for the target class (normal RT fluctuations) to learn a classifier that can recognize the samples belonging to the target class and identify the others as outliers (anomalous RT fluctuations).
+OC-SVM is known to have the advantages of simple modelling, strong interpretability, and better generalization ability than clustering methods.
+We define and use the following four kinds of features for the model.
+
+\begin{itemize}
+\item \textbf{Number of Over-Max Values}: the number of RT values in the current detection window that exceed the maximum RT value of a given comparison period.
+
+\item \textbf{Delta of Maximum Values}: the delta between the maximum RT value in the current detection window and the maximum RT value of a given comparison period.
+
+\item \textbf{Number of Over-Average Values}: the number of RT values in the current detection window that exceed the maximum moving average of the RT values of a given comparison period.
+
+\item \textbf{Ratio of Average Values}: the ratio of the average of the RT values in the current detection window to the maximum moving average of the RT values of a given comparison period.
+\end{itemize}
+
+We consider the last 10 minutes as the current detection window, i.e., considering the 10 RT values of the last 10 minutes.
+For the comparison periods, we consider the following three settings: the last one hour before the current detection window, the same hour of the previous day, the same hour of the same day of the previous week.
+Therefore, we have 12 features in total for the OC-SVM model.
+
+We use the Python based machine learning framework scikit-learn~\cite{scikitLearn} to implement the model.
+To train the model, we collect 100,000 cases of different services from the monitoring infrastructure of Alibaba.
+Each case includes a series of RT values of the current detection window and different comparison periods.
+We also collect 600 cases for verifying the trained model. 
+These cases are different from the training cases and the ratio of positive and negative cases is 1:1.
+The results of the verification are shown in Table~\ref{tab:performance_train}, which provide the recall, precision,
+F1-measure, FPR (False Positive Rate) of performance anomaly detection with different coverage of the training set.
+It can be seen that the model can accurately detect performance anomalies with only 10-20\% of the training set, and it can achieve very high accuracy when using 70\% of the training set.
+
+\begin{table}[ht]
+	\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+	\caption{Accuracy of Performance Anomaly Detection}
+	\label{tab:performance_train}
+    \small
+	\centering
+	%\resizebox{0.48\textwidth}{!}{
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline \textbf{Coverage} & \textbf{Recall} & \textbf{Precision} & \textbf{F1} & \textbf{FPR}\\
+			\hline 10\%  &  0.86 & 0.73 & 0.79 & 0.32 \\
+			\hline 20\%  &  0.81 & 0.88 & 0.84 & 0.12 \\
+            \hline 30\%  &  0.82 & 0.92 & 0.87 & 0.07 \\
+			\hline 40\%  &  0.83 & 0.92 & 0.87 & 0.08 \\
+			\hline 50\%  &  0.84 & 0.94 & 0.89 & 0.06 \\
+            \hline 60\%  &  0.83 & 0.94 & 0.88 & 0.06 \\
+			\hline 70\%  &  0.86 & 0.95 & 0.90 & 0.05 \\
+			\hline 80\%  &  0.87 & 0.95 & 0.91 & 0.05 \\
+            \hline 90\%  &  0.87 & 0.95 & 0.91 & 0.04 \\
+            \hline 100\% &  0.87 & 0.96 & 0.91 & 0.03 \\
+			\hline
+		\end{tabular}
+	%}
+	\vspace{-3pt}
+\end{table}
+

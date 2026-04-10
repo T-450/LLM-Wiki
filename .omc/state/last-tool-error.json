@@ -1,0 +1,7 @@
+{
+  "tool_name": "Read",
+  "tool_input_preview": "{\"file_path\":\"/home/t450/t450@workspace/LLM-Wiki/raw/papers/tracing-metrics-design-patterns-monitoring-cloud/main.tex\"}",
+  "error": "File content (14952 tokens) exceeds maximum allowed tokens (10000). Use offset and limit parameters to read specific portions of the file, or search for specific content instead of reading the whole file.",
+  "timestamp": "2026-04-10T01:36:32.061Z",
+  "retry_count": 1
+}

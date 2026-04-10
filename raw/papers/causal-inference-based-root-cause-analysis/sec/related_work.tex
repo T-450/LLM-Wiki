@@ -1,0 +1,43 @@
+% !TEX root=../main.tex
+\section{Related Works}\label{sec:related-work}
+
+\noindent
+\textbf{Root Cause Analysis.}
+% \paragraph{Root Cause Analysis}
+Corollary~\ref{thm:l2-necessary} explains that graph construction is a common step in the RCA literature for online service system operation.
+DFS-based methods~\cite{Chen:2014,Lin:2018,Liu:2021} traverse abnormal sub-graph, which is sensitive to anomaly detection results.
+Some works adopt random walk~\cite{Wang:2018,Meng:2020,Ma:2020} or PageRank~\cite{Wang:2021} to score candidate root cause indicators, lacking explainability.
+% Random walk-based and PageRank-based methods~\cite{Wang:2018,Meng:2020,Ma:2020,Wang:2021} lack explainability.
+Another line of works is invariant network-based methods~\cite{Cheng:2016,Ni:2017}.
+As these works adopt the pair-wise manner to learn the invariant relations, it is hard for them to reach the knowledge of RCA, restricted by CHT~\cite{Bareinboim:2022}.
+No methods above utilize causal inference.
+Sage~\cite{Gan:2021} conducts counterfactual analysis to locate root causes without a formal formulation.
+Corollary~\ref{thm:l3-unnecessary} states that counterfactual analysis is unnecessary.
+Hence, we did not include this method as a baseline.
+Meanwhile, CHT~\cite{Bareinboim:2022} indicates that it can be hard to conduct counterfactual analysis even with a CBN.
+
+The definition of root cause analysis varies with the scenario in the literature.
+% We treat the observed projection of a fault as the desired answer.
+% In contrast, some applications require an answer beyond the data, taking RCA as a classification task with supervised learning~\cite{Yi:2021}.
+% For homogeneous devices or services, operators are interested in the common features~\cite{Zhang:2021}.
+% Accordingly, multi-dimensional root cause analysis is conducted.
+Some applications require an answer beyond the data, taking RCA as a classification task with supervised learning~\cite{Yi:2021}.
+For homogeneous devices or services, operators are interested in the common features~\cite{Zhang:2021}.
+Accordingly, a multi-dimensional root cause analysis is conducted.
+In contrast, we treat the observed projection of a fault as the desired answer.
+The \nameref{thm:rc-criterion} further relates RCA in this work with \textit{contextual anomaly detection}~\cite{Chandola:2009}, treating parents in the CBN as the context for each variable.
+We take complex contextual anomaly detection methods as future work.
+
+\noindent
+\textbf{Causal Discovery.}
+% \paragraph{Causal Discovery}
+The task to obtain the CBN is named \textit{causal discovery}.
+We refer the readers to a recent survey~\cite{Guo:2020} for a thorough discussion.
+NOTEARS~\cite{Zheng:2018} converts the DAG search problem from the discrete space into a continuous one.
+Following NOTEARS, some recent works are based on gradient descent~\cite{He:2021}.
+
+Although causal discovery has its sound theory, the CBN discovered from data directly is not explainable for human operators.
+In contrast, some works obtain the CBN based on domain knowledge.
+MicroHECL~\cite{Liu:2021} traces the fault along with traffic, latency, or error rate in the call graph.
+Meanwhile, Sage~\cite{Gan:2021} constructs the CBN among latency and machine metrics.
+The structural graph proposed in this work is compatible with the assumptions in these two works, extending the kinds of meta metrics.

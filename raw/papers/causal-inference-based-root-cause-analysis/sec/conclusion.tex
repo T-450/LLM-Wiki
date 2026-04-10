@@ -1,0 +1,22 @@
+% !TEX root=../main.tex
+\section{Conclusion and Future Work}\label{sec:conclusion}
+
+Root cause analysis (RCA) is an essential task for OSS operations.
+In this work, we formulate RCA as a new causal inference task named \textit{intervention recognition}, based on which, we further obtain the \nameref{thm:rc-criterion} to find the root cause.
+We believe such a formulation bridge two well-studied fields (RCA and causal inference) and provide a promising new direction for the critical-yet-hard-to-solve RCA problem in OSS.
+
+% To apply such a criterion in OSS, we propose a novel unsupervised causal inference-based RCA method, \textit{CIRCA}.
+To apply such a criterion in OSS, we propose a novel causal inference-based RCA method, \textit{CIRCA}.
+CIRCA consists of three techniques, namely structural graph construction, regression-based hypothesis testing, and descendant adjustment.
+We verify the theoretical reliability of CIRCA in the simulation study.
+Moreover, CIRCA also outperforms baseline methods in a real-world dataset.
+
+In the future, we plan to include faulty data for regression.
+We hope that diverse data can help overcome the limited understanding of the system's normal status.
+This work rests on a set of assumptions that a real application may not satisfy.
+For example, some meta metrics do not have corresponding monitoring metrics in the skeleton we construct for the Oracle database.
+% In other words, they are unobserved common drivers of the downstream ones, violating the Causal Sufficiency assumption.
+As a result, they can imply common exogenous parents of the downstream monitoring metrics, violating the Markovian assumption.
+Explicitly modeling these hidden meta metrics may improve RCA performance.
+Meanwhile, the retrospect of analysis mistakes may also point to the lack of monitoring.
+Beyond the analysis framework in this work, discoveries on the underlying mechanism of OSS can also help climb the ladder of causation for the RCA task.

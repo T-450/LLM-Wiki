@@ -1,0 +1,89 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+\usepackage{adjustbox}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{arydshln}
+\usepackage{bm}  
+\usepackage{booktabs}
+\usepackage{cite}
+\usepackage{color, soul}
+\usepackage{enumitem}
+\usepackage{multirow}
+\usepackage{setspace}
+\usepackage{subfigure}
+\usepackage[normalem]{ulem}
+\usepackage{xspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[dvipsnames]{xcolor}
+\usepackage[colorlinks=true,citecolor=black,linkcolor=black, urlcolor=black]{hyperref}
+\usepackage{cleveref}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[]{collab}
+
+\usepackage[most]{tcolorbox}
+\definecolor{background}{HTML}{D9E7FF}
+\definecolor{edge}{HTML}{8686DD}
+\newtcolorbox{mybox}{colback=background!30,%gray background
+colframe=edge,% black frame colour
+width=\columnwidth,% total width
+boxrule = 0.3mm,
+top = 3pt, bottom=3pt, left=3pt, right=3pt
+}
+
+%%%%%%%%%%%%%%%%% For Co-authors: define your own color herein!!! %%%%%%%%%%%%%%%%%
+\newcommand{\name}{{Eadro}\xspace}
+\def\A{$\mathcal{TT}$\xspace}
+\def\B{$\mathcal{SN}$\xspace}
+
+% \definecolor{background}{rgb}{0.94, 0.97, 1.0}
+% \definecolor{edge}{rgb}{0.32, 0.48, 0.72}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+
+\def\mathbi#1{\textbf{\em #1}}
+
+\crefname{section}{§}{§§}
+\Crefname{section}{§}{§§}
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+\title{\name: An End-to-End Troubleshooting Framework for Microservices on Multi-source Data}
+
+\author{
+  \IEEEauthorblockN{
+    Cheryl Lee\IEEEauthorrefmark{1},
+    Tianyi Yang\IEEEauthorrefmark{1},
+    Zhuangbin Chen\IEEEauthorrefmark{1},
+    Yuxin Su\IEEEauthorrefmark{2}\thanks{Yuxin Su is the corresponding author.}, 
+    and
+    Michael R. Lyu\IEEEauthorrefmark{1}
+  }
+
+  \IEEEauthorblockA{\IEEEauthorrefmark{1}Department of Computer Science and Engineering, The Chinese University of Hong Kong, Hong Kong, China.\\
+    Email: cheryllee@link.cuhk.edu.hk, \{tyyang, zbchen, lyu\}@cse.cuhk.edu.hk}
+
+  \IEEEauthorblockA{\IEEEauthorrefmark{2}Sun Yat-sen University, Guangzhou, China.
+    Email: suyx35@mail.sysu.edu.cn}
+}
+
+\maketitle
+\input{sections/0-abstract}
+\begin{IEEEkeywords}
+Microservices, Root Cause Localization, Anomaly Detection, Traces
+\end{IEEEkeywords}
+\input{sections/1-introduction}
+\input{sections/2-background}
+\input{sections/3-motivation}
+\input{sections/4-methodology}
+\input{sections/5-evaluation}
+\input{sections/7-discussion}
+\input{sections/8-literature}
+\input{sections/9-conclusion}
+\input{sections/10-ack.tex}
+\bibliographystyle{IEEEtran}
+\bibliography{main}
+\end{document}

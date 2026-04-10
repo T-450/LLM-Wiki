@@ -1,0 +1,727 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{80}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[uni(2023)]%
+        {unibcp}
+ \bibinfo{year}{2023}\natexlab{}.
+\newblock \bibinfo{title}{Bayesian Change Point Detection}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://github.com/hildensia/bayesian_changepoint_detection}
+\showURL{%
+Retrieved May 14, 2024 from \tempurl}
+
+
+\bibitem[cad(2023)]%
+        {cadvisor}
+ \bibinfo{year}{2023}\natexlab{}.
+\newblock \bibinfo{title}{Container Advisor - an open-source tool to monitor containers}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://github.com/google/cadvisor}
+\showURL{%
+Retrieved May 14, 2024 from \tempurl}
+
+
+\bibitem[ist(2023)]%
+        {istio}
+ \bibinfo{year}{2023}\natexlab{}.
+\newblock \bibinfo{title}{The Istio service mesh}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://istio.io/}
+\showURL{%
+Retrieved May 14, 2024 from \tempurl}
+
+
+\bibitem[mod(2023)]%
+        {modifiedzscore}
+ \bibinfo{year}{2023}\natexlab{}.
+\newblock \bibinfo{title}{Modified z score}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://www.ibm.com/docs/en/cognos-analytics/11.1.0?topic=terms-modified-z-score}
+\showURL{%
+Retrieved May 14, 2024 from \tempurl}
+
+
+\bibitem[ob(2023)]%
+        {ob}
+ \bibinfo{year}{2023}\natexlab{}.
+\newblock \bibinfo{title}{Online Boutique is a cloud-first microservices demo application}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://github.com/GoogleCloudPlatform/microservices-demo}
+\showURL{%
+Retrieved May 14, 2024 from \tempurl}
+
+
+\bibitem[pro(2023)]%
+        {prometheus}
+ \bibinfo{year}{2023}\natexlab{}.
+\newblock \bibinfo{title}{An open-source monitoring and alerting toolkit}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://prometheus.io/}
+\showURL{%
+Retrieved May 14, 2024 from \tempurl}
+
+
+\bibitem[soc(2023)]%
+        {sockshop}
+ \bibinfo{year}{2023}\natexlab{}.
+\newblock \bibinfo{title}{Sock Shop - A Microservices Demo Application}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://microservices-demo.github.io/}
+\showURL{%
+Retrieved May 14, 2024 from \tempurl}
+
+
+\bibitem[rob(2023)]%
+        {robustzscore}
+ \bibinfo{year}{2023}\natexlab{}.
+\newblock \bibinfo{title}{Statistical Procedures, Calculations and Formulae, APPENDIX D}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://www.apac-accreditation.org/app/uploads/2017/08/aplac_t017_appendix_d.pdf}
+\showURL{%
+Retrieved May 14, 2024 from \tempurl}
+
+
+\bibitem[tt(2023)]%
+        {tt}
+ \bibinfo{year}{2023}\natexlab{}.
+\newblock \bibinfo{title}{Train Ticket Benchmark System}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://github.com/FudanSELab/train-ticket}
+\showURL{%
+Retrieved May 14, 2024 from \tempurl}
+
+
+\bibitem[dat(2024a)]%
+        {datadog1}
+ \bibinfo{year}{2024}\natexlab{a}.
+\newblock \bibinfo{title}{Automated root cause analysis with Watchdog RCA}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://www.datadoghq.com/blog/datadog-watchdog-automated-root-cause-analysis/}
+\showURL{%
+Retrieved May 14, 2024 from \tempurl}
+
+
+\bibitem[bar(2024a)]%
+        {barodatasets}
+ \bibinfo{year}{2024}\natexlab{a}.
+\newblock \bibinfo{title}{BARO Dataset Artifacts at Zenodo}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://zenodo.org/records/11046533}
+\showURL{%
+Retrieved May 14, 2024 from \tempurl}
+
+
+\bibitem[bar(2024b)]%
+        {barogithub}
+ \bibinfo{year}{2024}\natexlab{b}.
+\newblock \bibinfo{title}{BARO: Root Cause Analysis for Microservices}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://github.com/phamquiluan/baro}
+\showURL{%
+Retrieved May 14, 2024 from \tempurl}
+
+
+\bibitem[bar(2024c)]%
+        {barogithubzenodo}
+ \bibinfo{year}{2024}\natexlab{c}.
+\newblock \bibinfo{title}{BARO Software Artifacts at Zenodo}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.5281/zenodo.11094092}
+\showURL{%
+Retrieved May 14, 2024 from \tempurl}
+
+
+\bibitem[dat(2024b)]%
+        {datadog}
+ \bibinfo{year}{2024}\natexlab{b}.
+\newblock \bibinfo{title}{Datadog: Modern monitoring and security}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://www.datadoghq.com}
+\showURL{%
+Retrieved May 14, 2024 from \tempurl}
+
+
+\bibitem[dyn(2024a)]%
+        {dynatrace3}
+ \bibinfo{year}{2024}\natexlab{a}.
+\newblock \bibinfo{title}{Dynatrace: Root cause analysis with example}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://docs.dynatrace.com/docs/platform/davis-ai/problem-and-root-cause/root-cause-analysis#expand--details-and-example}
+\showURL{%
+Retrieved May 14, 2024 from \tempurl}
+
+
+\bibitem[dyn(2024b)]%
+        {dynatrace}
+ \bibinfo{year}{2024}\natexlab{b}.
+\newblock \bibinfo{title}{Dynatrace: Unified observability and security}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://www.dynatrace.com}
+\showURL{%
+Retrieved May 14, 2024 from \tempurl}
+
+
+\bibitem[goo(2024)]%
+        {googlesre}
+ \bibinfo{year}{2024}\natexlab{}.
+\newblock \bibinfo{title}{Google - Site Reliability Engineering}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://sre.google/sre-book/monitoring-distributed-systems/}
+\showURL{%
+Retrieved May 14, 2024 from \tempurl}
+
+
+\bibitem[dat(2024c)]%
+        {datadog2}
+ \bibinfo{year}{2024}\natexlab{c}.
+\newblock \bibinfo{title}{Introducing anomaly detection in Datadog}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://www.datadoghq.com/blog/introducing-anomaly-detection-datadog/}
+\showURL{%
+Retrieved May 14, 2024 from \tempurl}
+
+
+\bibitem[dyn(2024c)]%
+        {dynatrace1}
+ \bibinfo{year}{2024}\natexlab{c}.
+\newblock \bibinfo{title}{Set up anomaly detection based on your business needs}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://www.dynatrace.com/news/blog/metric-events-set-up-anomaly-detection-based-on-your-business-needs/}
+\showURL{%
+Retrieved May 14, 2024 from \tempurl}
+
+
+\bibitem[str(2024)]%
+        {stressng}
+ \bibinfo{year}{2024}\natexlab{}.
+\newblock \bibinfo{title}{Stress test for Computer system}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://wiki.ubuntu.com/Kernel/Reference/stress-ng}
+\showURL{%
+Retrieved May 14, 2024 from \tempurl}
+
+
+\bibitem[tc(2024)]%
+        {tc}
+ \bibinfo{year}{2024}\natexlab{}.
+\newblock \bibinfo{title}{Traffic Control}.
+\newblock
+\newblock
+\urldef\tempurl%
+\url{https://man7.org/linux/man-pages/man8/tc.8.html}
+\showURL{%
+Retrieved May 14, 2024 from \tempurl}
+
+
+\bibitem[Adams and MacKay(2007)]%
+        {adams2007bayesian}
+\bibfield{author}{\bibinfo{person}{Ryan~Prescott Adams} {and} \bibinfo{person}{David~JC MacKay}.} \bibinfo{year}{2007}\natexlab{}.
+\newblock \showarticletitle{Bayesian online changepoint detection}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:0710.3742}} (\bibinfo{year}{2007}).
+\newblock
+
+
+\bibitem[Aggarwal et~al\mbox{.}(2020)]%
+        {aggarwal2020localization}
+\bibfield{author}{\bibinfo{person}{Pooja Aggarwal}, \bibinfo{person}{Ajay Gupta}, \bibinfo{person}{Prateeti Mohapatra}, \bibinfo{person}{Seema Nagar}, \bibinfo{person}{Atri Mandal}, \bibinfo{person}{Qing Wang}, {and} \bibinfo{person}{Amit Paradkar}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Localization of operational faults in cloud applications by mining causal dependencies in logs using golden signals}. In \bibinfo{booktitle}{\emph{International Conference on Service-Oriented Computing}}. Springer, \bibinfo{pages}{137--149}.
+\newblock
+
+
+\bibitem[Aggarwal et~al\mbox{.}(2021)]%
+        {aggarwal2021causal}
+\bibfield{author}{\bibinfo{person}{Pooja Aggarwal}, \bibinfo{person}{Seema Nagar}, \bibinfo{person}{Ajay Gupta}, \bibinfo{person}{Larisa Shwartz}, \bibinfo{person}{Prateeti Mohapatra}, \bibinfo{person}{Qing Wang}, \bibinfo{person}{Amit Paradkar}, {and} \bibinfo{person}{Atri Mandal}.} \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{Causal modeling based fault localization in cloud systems using golden signals}. In \bibinfo{booktitle}{\emph{2021 IEEE 14th International Conference on Cloud Computing (CLOUD)}}. IEEE, \bibinfo{pages}{124--135}.
+\newblock
+
+
+\bibitem[Avizienis et~al\mbox{.}(2004)]%
+        {avizienis2004basic}
+\bibfield{author}{\bibinfo{person}{Algirdas Avizienis}, \bibinfo{person}{J-C Laprie}, \bibinfo{person}{Brian Randell}, {and} \bibinfo{person}{Carl Landwehr}.} \bibinfo{year}{2004}\natexlab{}.
+\newblock \showarticletitle{Basic concepts and taxonomy of dependable and secure computing}.
+\newblock \bibinfo{journal}{\emph{IEEE transactions on dependable and secure computing}} \bibinfo{volume}{1}, \bibinfo{number}{1} (\bibinfo{year}{2004}), \bibinfo{pages}{11--33}.
+\newblock
+
+
+\bibitem[Bl\'{a}zquez-Garc\'{\i}a et~al\mbox{.}(2021)]%
+        {BlazquezGarc2021ADreview}
+\bibfield{author}{\bibinfo{person}{Ane Bl\'{a}zquez-Garc\'{\i}a}, \bibinfo{person}{Angel Conde}, \bibinfo{person}{Usue Mori}, {and} \bibinfo{person}{Jose~A. Lozano}.} \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{A Review on Outlier/Anomaly Detection in Time Series Data}.
+\newblock \bibinfo{journal}{\emph{Comput. Surveys}} \bibinfo{volume}{54}, \bibinfo{number}{3}, Article \bibinfo{articleno}{56} (\bibinfo{year}{2021}).
+\newblock
+
+
+\bibitem[Brand{\'o}n et~al\mbox{.}(2020)]%
+        {brandon2020graph}
+\bibfield{author}{\bibinfo{person}{{\'A}lvaro Brand{\'o}n}, \bibinfo{person}{Marc Sol{\'e}}, \bibinfo{person}{Alberto Hu{\'e}lamo}, \bibinfo{person}{David Solans}, \bibinfo{person}{Mar{\'\i}a~S P{\'e}rez}, {and} \bibinfo{person}{Victor Munt{\'e}s-Mulero}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Graph-based root cause analysis for service-oriented and microservice architectures}.
+\newblock \bibinfo{journal}{\emph{Journal of Systems and Software}}  \bibinfo{volume}{159} (\bibinfo{year}{2020}), \bibinfo{pages}{110432}.
+\newblock
+
+
+\bibitem[Chen et~al\mbox{.}(2019a)]%
+        {Chen2019incienttriage}
+\bibfield{author}{\bibinfo{person}{Junjie Chen}, \bibinfo{person}{Xiaoting He}, \bibinfo{person}{Qingwei Lin}, \bibinfo{person}{Yong Xu}, \bibinfo{person}{Hongyu Zhang}, \bibinfo{person}{Dan Hao}, \bibinfo{person}{Feng Gao}, \bibinfo{person}{Zhangwei Xu}, \bibinfo{person}{Yingnong Dang}, {and} \bibinfo{person}{Dongmei Zhang}.} \bibinfo{year}{2019}\natexlab{a}.
+\newblock \showarticletitle{An Empirical Investigation of Incident Triage for Online Service Systems}. In \bibinfo{booktitle}{\emph{2019 IEEE/ACM 41st International Conference on Software Engineering: Software Engineering in Practice (ICSE-SEIP)}}. \bibinfo{pages}{111--120}.
+\newblock
+
+
+\bibitem[Chen et~al\mbox{.}(2016)]%
+        {chen2016causeinfer}
+\bibfield{author}{\bibinfo{person}{Pengfei Chen}, \bibinfo{person}{Yong Qi}, {and} \bibinfo{person}{Di Hou}.} \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{CauseInfer: Automated end-to-end performance diagnosis with hierarchical causality graph in cloud environment}.
+\newblock \bibinfo{journal}{\emph{IEEE transactions on services computing}} \bibinfo{volume}{12}, \bibinfo{number}{2} (\bibinfo{year}{2016}), \bibinfo{pages}{214--230}.
+\newblock
+
+
+\bibitem[Chen et~al\mbox{.}(2014)]%
+        {Chen2014Causeinfer}
+\bibfield{author}{\bibinfo{person}{Pengfei Chen}, \bibinfo{person}{Yong Qi}, \bibinfo{person}{Pengfei Zheng}, {and} \bibinfo{person}{Di Hou}.} \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{CauseInfer: Automatic and distributed performance diagnosis with hierarchical causality graph in large distributed systems}. In \bibinfo{booktitle}{\emph{IEEE Conference on Computer Communications (INFOCOM'14)}}. \bibinfo{pages}{1887--1895}.
+\newblock
+
+
+\bibitem[Chen et~al\mbox{.}(2019b)]%
+        {Chen2019airalert}
+\bibfield{author}{\bibinfo{person}{Yujun Chen}, \bibinfo{person}{Xian Yang}, \bibinfo{person}{Qingwei Lin}, \bibinfo{person}{Hongyu Zhang}, \bibinfo{person}{Feng Gao}, \bibinfo{person}{Zhangwei Xu}, \bibinfo{person}{Yingnong Dang}, \bibinfo{person}{Dongmei Zhang}, \bibinfo{person}{Hang Dong}, \bibinfo{person}{Yong Xu}, \bibinfo{person}{Hao Li}, {and} \bibinfo{person}{Yu Kang}.} \bibinfo{year}{2019}\natexlab{b}.
+\newblock \showarticletitle{Outage Prediction and Diagnosis for Cloud Service Systems}. In \bibinfo{booktitle}{\emph{The World Wide Web Conference}} (San Francisco, CA, USA) \emph{(\bibinfo{series}{WWW '19})}. \bibinfo{publisher}{Association for Computing Machinery}, \bibinfo{address}{New York, NY, USA}, \bibinfo{pages}{2659–2665}.
+\newblock
+
+
+\bibitem[Chen et~al\mbox{.}(2020)]%
+        {Chen2020incidentmanagment}
+\bibfield{author}{\bibinfo{person}{Zhuangbin Chen}, \bibinfo{person}{Yu Kang}, \bibinfo{person}{Liqun Li}, \bibinfo{person}{Xu Zhang}, \bibinfo{person}{Hongyu Zhang}, \bibinfo{person}{Hui Xu}, \bibinfo{person}{Yangfan Zhou}, \bibinfo{person}{Li Yang}, \bibinfo{person}{Jeffrey Sun}, \bibinfo{person}{Zhangwei Xu}, \bibinfo{person}{Yingnong Dang}, \bibinfo{person}{Feng Gao}, \bibinfo{person}{Pu Zhao}, \bibinfo{person}{Bo Qiao}, \bibinfo{person}{Qingwei Lin}, \bibinfo{person}{Dongmei Zhang}, {and} \bibinfo{person}{Michael~R. Lyu}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Towards Intelligent Incident Management: Why We Need It and How We Make It}. In \bibinfo{booktitle}{\emph{Proceedings of the 28th ACM Joint Meeting on European Software Engineering Conference and Symposium on the Foundations of Software Engineering}} (Virtual Event, USA) \emph{(\bibinfo{series}{ESEC/FSE 2020})}. \bibinfo{pages}{1487–1497}.
+\newblock
+
+
+\bibitem[Chen et~al\mbox{.}(2022)]%
+        {chen2022adaptive}
+\bibfield{author}{\bibinfo{person}{Zhuangbin Chen}, \bibinfo{person}{Jinyang Liu}, \bibinfo{person}{Yuxin Su}, \bibinfo{person}{Hongyu Zhang}, \bibinfo{person}{Xiao Ling}, \bibinfo{person}{Yongqiang Yang}, {and} \bibinfo{person}{Michael~R Lyu}.} \bibinfo{year}{2022}\natexlab{}.
+\newblock \showarticletitle{Adaptive performance anomaly detection for online service systems via pattern sketching}. In \bibinfo{booktitle}{\emph{Proceedings of the 44th International Conference on Software Engineering}}. \bibinfo{pages}{61--72}.
+\newblock
+
+
+\bibitem[Chickering(2002)]%
+        {Chickering2002Ges}
+\bibfield{author}{\bibinfo{person}{David~Maxwell Chickering}.} \bibinfo{year}{2002}\natexlab{}.
+\newblock \showarticletitle{Learning Equivalence Classes of Bayesian-Network Structures}.
+\newblock \bibinfo{journal}{\emph{Journal of Machine Learning Research}}  \bibinfo{volume}{2} (\bibinfo{year}{2002}), \bibinfo{pages}{445–498}.
+\newblock
+
+
+\bibitem[Coles(2001)]%
+        {Coles2001EVT}
+\bibfield{author}{\bibinfo{person}{Stuart Coles}.} \bibinfo{year}{2001}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{An introduction to statistical modeling of extreme values}}.
+\newblock \bibinfo{publisher}{Springer-Verlag}, \bibinfo{address}{London}.
+\newblock
+
+
+\bibitem[Friedman and Rafsky(1979)]%
+        {friedman1979multivariate}
+\bibfield{author}{\bibinfo{person}{Jerome~H Friedman} {and} \bibinfo{person}{Lawrence~C Rafsky}.} \bibinfo{year}{1979}\natexlab{}.
+\newblock \showarticletitle{Multivariate generalizations of the Wald-Wolfowitz and Smirnov two-sample tests}.
+\newblock \bibinfo{journal}{\emph{The Annals of Statistics}} (\bibinfo{year}{1979}), \bibinfo{pages}{697--717}.
+\newblock
+
+
+\bibitem[Friedman and Rafsky(1983)]%
+        {friedman1983graph}
+\bibfield{author}{\bibinfo{person}{Jerome~H Friedman} {and} \bibinfo{person}{Lawrence~C Rafsky}.} \bibinfo{year}{1983}\natexlab{}.
+\newblock \showarticletitle{Graph-theoretic measures of multivariate association and prediction}.
+\newblock \bibinfo{journal}{\emph{The Annals of Statistics}} (\bibinfo{year}{1983}), \bibinfo{pages}{377--391}.
+\newblock
+
+
+\bibitem[Granger(1980)]%
+        {Granger1980causal}
+\bibfield{author}{\bibinfo{person}{C.W.J. Granger}.} \bibinfo{year}{1980}\natexlab{}.
+\newblock \showarticletitle{Testing for causality: A personal viewpoint}.
+\newblock \bibinfo{journal}{\emph{Journal of Economic Dynamics and Control}}  \bibinfo{volume}{2} (\bibinfo{year}{1980}), \bibinfo{pages}{329--352}.
+\newblock
+
+
+\bibitem[He et~al\mbox{.}(2022)]%
+        {he2022graph}
+\bibfield{author}{\bibinfo{person}{Zilong He}, \bibinfo{person}{Pengfei Chen}, \bibinfo{person}{Yu Luo}, \bibinfo{person}{Qiuyu Yan}, \bibinfo{person}{Hongyang Chen}, \bibinfo{person}{Guangba Yu}, {and} \bibinfo{person}{Fangyuan Li}.} \bibinfo{year}{2022}\natexlab{}.
+\newblock \showarticletitle{Graph based Incident Extraction and Diagnosis in Large-Scale Online Systems}. In \bibinfo{booktitle}{\emph{Proceedings of the 37th IEEE/ACM International Conference on Automated Software Engineering (ASE'22)}}. \bibinfo{pages}{1--13}.
+\newblock
+
+
+\bibitem[Ikram et~al\mbox{.}(2022)]%
+        {Azam2022rcd}
+\bibfield{author}{\bibinfo{person}{Azam Ikram}, \bibinfo{person}{Sarthak Chakraborty}, \bibinfo{person}{Subrata Mitra}, \bibinfo{person}{Shiv Saini}, \bibinfo{person}{Saurabh Bagchi}, {and} \bibinfo{person}{Murat Kocaoglu}.} \bibinfo{year}{2022}\natexlab{}.
+\newblock \showarticletitle{Root Cause Analysis of Failures in Microservices through Causal Discovery}. In \bibinfo{booktitle}{\emph{Advances in Neural Information Processing Systems (NeurIPS'22)}}, Vol.~\bibinfo{volume}{35}. \bibinfo{pages}{31158--31170}.
+\newblock
+
+
+\bibitem[Jaber et~al\mbox{.}(2020)]%
+        {Jaber2020PsiFCI}
+\bibfield{author}{\bibinfo{person}{Amin Jaber}, \bibinfo{person}{Murat Kocaoglu}, \bibinfo{person}{Karthikeyan Shanmugam}, {and} \bibinfo{person}{Elias Bareinboim}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Causal Discovery from Soft Interventions with Unknown Targets: Characterization and Learning}. In \bibinfo{booktitle}{\emph{Advances in Neural Information Processing Systems (NeurIPS'20)}}, Vol.~\bibinfo{volume}{33}. \bibinfo{pages}{9551--9561}.
+\newblock
+
+
+\bibitem[Le and Zhang(2023)]%
+        {le2023log}
+\bibfield{author}{\bibinfo{person}{Van-Hoang Le} {and} \bibinfo{person}{Hongyu Zhang}.} \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{Log parsing with prompt-based few-shot learning}. In \bibinfo{booktitle}{\emph{2023 IEEE/ACM 45th International Conference on Software Engineering (ICSE)}}. IEEE, \bibinfo{pages}{2438--2449}.
+\newblock
+
+
+\bibitem[Lee et~al\mbox{.}(2023)]%
+        {lee2023eadro}
+\bibfield{author}{\bibinfo{person}{Cheryl Lee}, \bibinfo{person}{Tianyi Yang}, \bibinfo{person}{Zhuangbin Chen}, \bibinfo{person}{Yuxin Su}, {and} \bibinfo{person}{Michael~R Lyu}.} \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{Eadro: An End-to-End Troubleshooting Framework for Microservices on Multi-source Data}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2302.05092}} (\bibinfo{year}{2023}).
+\newblock
+
+
+\bibitem[Li et~al\mbox{.}(2022)]%
+        {Li2022Circa}
+\bibfield{author}{\bibinfo{person}{Mingjie Li}, \bibinfo{person}{Zeyan Li}, \bibinfo{person}{Kanglin Yin}, \bibinfo{person}{Xiaohui Nie}, \bibinfo{person}{Wenchi Zhang}, \bibinfo{person}{Kaixin Sui}, {and} \bibinfo{person}{Dan Pei}.} \bibinfo{year}{2022}\natexlab{}.
+\newblock \showarticletitle{Causal Inference-Based Root Cause Analysis for Online Service Systems with Intervention Recognition}. In \bibinfo{booktitle}{\emph{Proceedings of the 28th ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD'22)}}. \bibinfo{pages}{3230–3240}.
+\newblock
+
+
+\bibitem[Li et~al\mbox{.}(2021)]%
+        {dan2021practical}
+\bibfield{author}{\bibinfo{person}{Zeyan Li}, \bibinfo{person}{Junjie Chen}, \bibinfo{person}{Rui Jiao}, \bibinfo{person}{Nengwen Zhao}, \bibinfo{person}{Zhijun Wang}, \bibinfo{person}{Shuwei Zhang}, \bibinfo{person}{Yanjun Wu}, \bibinfo{person}{Long Jiang}, \bibinfo{person}{Leiqin Yan}, \bibinfo{person}{Zikai Wang}, \bibinfo{person}{Zhekang Chen}, \bibinfo{person}{Wenchi Zhang}, \bibinfo{person}{Xiaohui Nie}, \bibinfo{person}{Kaixin Sui}, {and} \bibinfo{person}{Dan Pei}.} \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{Practical Root Cause Localization for Microservice Systems via Trace Analysis}. In \bibinfo{booktitle}{\emph{2021 IEEE/ACM 29th International Symposium on Quality of Service (IWQOS'21)}}. \bibinfo{pages}{1--10}.
+\newblock
+
+
+\bibitem[Lin et~al\mbox{.}(2018)]%
+        {Jinjin2018Microscope}
+\bibfield{author}{\bibinfo{person}{Jinjin Lin}, \bibinfo{person}{Pengfei Chen}, {and} \bibinfo{person}{Zibin Zheng}.} \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{Microscope: Pinpoint Performance Issues with Causal Graphs in Micro-service Environments}. In \bibinfo{booktitle}{\emph{Service-Oriented Computing}}. \bibinfo{pages}{3--20}.
+\newblock
+
+
+\bibitem[Liu et~al\mbox{.}(2023)]%
+        {liu2023pyrca}
+\bibfield{author}{\bibinfo{person}{Chenghao Liu}, \bibinfo{person}{Wenzhuo Yang}, \bibinfo{person}{Himanshu Mittal}, \bibinfo{person}{Manpreet Singh}, \bibinfo{person}{Doyen Sahoo}, {and} \bibinfo{person}{Steven~CH Hoi}.} \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{PyRCA: A Library for Metric-based Root Cause Analysis}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2306.11417}} (\bibinfo{year}{2023}).
+\newblock
+
+
+\bibitem[Liu et~al\mbox{.}(2021)]%
+        {liu2021microhecl}
+\bibfield{author}{\bibinfo{person}{Dewei Liu}, \bibinfo{person}{Chuan He}, \bibinfo{person}{Xin Peng}, \bibinfo{person}{Fan Lin}, \bibinfo{person}{Chenxi Zhang}, \bibinfo{person}{Shengfang Gong}, \bibinfo{person}{Ziang Li}, \bibinfo{person}{Jiayu Ou}, {and} \bibinfo{person}{Zheshun Wu}.} \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{Microhecl: High-efficient root cause localization in large-scale microservice systems}. In \bibinfo{booktitle}{\emph{2021 IEEE/ACM 43rd International Conference on Software Engineering: Software Engineering in Practice (ICSE-SEIP)}}. IEEE, \bibinfo{pages}{338--347}.
+\newblock
+
+
+\bibitem[Luo et~al\mbox{.}(2014)]%
+        {luo2014correlating}
+\bibfield{author}{\bibinfo{person}{Chen Luo}, \bibinfo{person}{Jian-Guang Lou}, \bibinfo{person}{Qingwei Lin}, \bibinfo{person}{Qiang Fu}, \bibinfo{person}{Rui Ding}, \bibinfo{person}{Dongmei Zhang}, {and} \bibinfo{person}{Zhe Wang}.} \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{Correlating events with time series for incident diagnosis}. In \bibinfo{booktitle}{\emph{Proceedings of the 20th ACM SIGKDD international conference on Knowledge discovery and data mining}}. \bibinfo{pages}{1583--1592}.
+\newblock
+
+
+\bibitem[Ma et~al\mbox{.}(2019)]%
+        {Ma2019Msrank}
+\bibfield{author}{\bibinfo{person}{Meng Ma}, \bibinfo{person}{Weilan Lin}, \bibinfo{person}{Disheng Pan}, {and} \bibinfo{person}{Ping Wang}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{MS-Rank: Multi-Metric and Self-Adaptive Root Cause Diagnosis for Microservice Applications}. In \bibinfo{booktitle}{\emph{IEEE International Conference on Web Services (ICWS'19)}}. \bibinfo{pages}{60--67}.
+\newblock
+
+
+\bibitem[Ma et~al\mbox{.}(2020)]%
+        {Ma2020Automap}
+\bibfield{author}{\bibinfo{person}{Meng Ma}, \bibinfo{person}{Jingmin Xu}, \bibinfo{person}{Yuan Wang}, \bibinfo{person}{Pengfei Chen}, \bibinfo{person}{Zonghua Zhang}, {and} \bibinfo{person}{Ping Wang}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{AutoMAP: Diagnose Your Microservice-Based Web Applications Automatically}. In \bibinfo{booktitle}{\emph{Proceedings of The Web Conference}} \emph{(\bibinfo{series}{WWW'20})}. \bibinfo{pages}{246–258}.
+\newblock
+
+
+\bibitem[Mariani et~al\mbox{.}(2018)]%
+        {mariani2018localizing}
+\bibfield{author}{\bibinfo{person}{Leonardo Mariani}, \bibinfo{person}{Cristina Monni}, \bibinfo{person}{Mauro Pezz{\'e}}, \bibinfo{person}{Oliviero Riganelli}, {and} \bibinfo{person}{Rui Xin}.} \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{Localizing faults in cloud systems}. In \bibinfo{booktitle}{\emph{2018 IEEE 11th International Conference on Software Testing, Verification and Validation (ICST)}}. IEEE, \bibinfo{pages}{262--273}.
+\newblock
+
+
+\bibitem[Meng et~al\mbox{.}(2020)]%
+        {Meng2020Microcause}
+\bibfield{author}{\bibinfo{person}{Yuan Meng}, \bibinfo{person}{Shenglin Zhang}, \bibinfo{person}{Yongqian Sun}, \bibinfo{person}{Ruru Zhang}, \bibinfo{person}{Zhilong Hu}, \bibinfo{person}{Yiyin Zhang}, \bibinfo{person}{Chenyang Jia}, \bibinfo{person}{Zhaogang Wang}, {and} \bibinfo{person}{Dan Pei}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Localizing Failure Root Causes in a Microservice through Causality Inference}. In \bibinfo{booktitle}{\emph{IEEE/ACM 28th International Symposium on Quality of Service (IWQoS'20)}}. \bibinfo{pages}{1--10}.
+\newblock
+
+
+\bibitem[Pan et~al\mbox{.}(2021)]%
+        {pan2021dycauserca}
+\bibfield{author}{\bibinfo{person}{Yicheng Pan}, \bibinfo{person}{Meng Ma}, \bibinfo{person}{Xinrui Jiang}, {and} \bibinfo{person}{Ping Wang}.} \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{Faster, deeper, easier: crowdsourcing diagnosis of microservice kernel failure from user space}. In \bibinfo{booktitle}{\emph{Proceedings of the 30th ACM SIGSOFT International Symposium on Software Testing and Analysis}}. \bibinfo{pages}{646--657}.
+\newblock
+
+
+\bibitem[Runge et~al\mbox{.}(2019)]%
+        {Runge2019PCMCI}
+\bibfield{author}{\bibinfo{person}{Jakob Runge}, \bibinfo{person}{Peer Nowack}, \bibinfo{person}{Marlene Kretschmer}, \bibinfo{person}{Seth Flaxman}, {and} \bibinfo{person}{Dino Sejdinovic}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Detecting and quantifying causal associations in large nonlinear time series datasets}.
+\newblock \bibinfo{journal}{\emph{Science Advances}} \bibinfo{volume}{5}, \bibinfo{number}{11} (\bibinfo{year}{2019}).
+\newblock
+
+
+\bibitem[Samir and Pahl(2019)]%
+        {samir2019dla}
+\bibfield{author}{\bibinfo{person}{Areeg Samir} {and} \bibinfo{person}{Claus Pahl}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Dla: Detecting and localizing anomalies in containerized microservice architectures using markov models}. In \bibinfo{booktitle}{\emph{2019 7th International Conference on Future Internet of Things and Cloud (FiCloud)}}. IEEE, \bibinfo{pages}{205--213}.
+\newblock
+
+
+\bibitem[Shan et~al\mbox{.}(2019)]%
+        {Shan2019Ediagnosis}
+\bibfield{author}{\bibinfo{person}{Huasong Shan}, \bibinfo{person}{Yuan Chen}, \bibinfo{person}{Haifeng Liu}, \bibinfo{person}{Yunpeng Zhang}, \bibinfo{person}{Xiao Xiao}, \bibinfo{person}{Xiaofeng He}, \bibinfo{person}{Min Li}, {and} \bibinfo{person}{Wei Ding}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{{$\epsilon$}-Diagnosis: Unsupervised and Real-Time Diagnosis of Small-Window Long-Tail Latency in Large-Scale Microservice Platforms}. In \bibinfo{booktitle}{\emph{The World Wide Web Conference (WWW'19)}}. \bibinfo{pages}{3215–3222}.
+\newblock
+
+
+\bibitem[Shimizu et~al\mbox{.}(2006)]%
+        {Shimizu2006Lingam}
+\bibfield{author}{\bibinfo{person}{Shohei Shimizu}, \bibinfo{person}{Patrik~O. Hoyer}, \bibinfo{person}{Aapo Hyvarinen}, {and} \bibinfo{person}{Antti Kerminen}.} \bibinfo{year}{2006}\natexlab{}.
+\newblock \showarticletitle{A Linear Non-Gaussian Acyclic Model for Causal Discovery}.
+\newblock \bibinfo{journal}{\emph{Journal of Machine Learning Research}} \bibinfo{volume}{7}, \bibinfo{number}{72} (\bibinfo{year}{2006}), \bibinfo{pages}{2003--2030}.
+\newblock
+
+
+\bibitem[Siffer et~al\mbox{.}(2017)]%
+        {siffer2017anomaly}
+\bibfield{author}{\bibinfo{person}{Alban Siffer}, \bibinfo{person}{Pierre-Alain Fouque}, \bibinfo{person}{Alexandre Termier}, {and} \bibinfo{person}{Christine Largouet}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Anomaly detection in streams with extreme value theory}. In \bibinfo{booktitle}{\emph{Proceedings of the 23rd ACM SIGKDD international conference on knowledge discovery and data mining}}. \bibinfo{pages}{1067--1075}.
+\newblock
+
+
+\bibitem[Soldani and Brogi(2022)]%
+        {Soldani2022rcasurvey}
+\bibfield{author}{\bibinfo{person}{Jacopo Soldani} {and} \bibinfo{person}{Antonio Brogi}.} \bibinfo{year}{2022}\natexlab{}.
+\newblock \showarticletitle{Anomaly Detection and Failure Root Cause Analysis in (Micro) Service-Based Cloud Applications: A Survey}.
+\newblock \bibinfo{journal}{\emph{Comput. Surveys}} \bibinfo{volume}{55}, \bibinfo{number}{3} (\bibinfo{year}{2022}).
+\newblock
+
+
+\bibitem[Spirtes et~al\mbox{.}(1993)]%
+        {Spirtes1993Causal}
+\bibfield{author}{\bibinfo{person}{P. Spirtes}, \bibinfo{person}{C. Glymour}, {and} \bibinfo{person}{R. Scheines}.} \bibinfo{year}{1993}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Causation, Prediction, and Search} (\bibinfo{edition}{1st} ed.)}.
+\newblock \bibinfo{publisher}{MIT press}.
+\newblock
+
+
+\bibitem[Spirtes et~al\mbox{.}(1995)]%
+        {Spirtes1995fci}
+\bibfield{author}{\bibinfo{person}{Peter Spirtes}, \bibinfo{person}{Christopher Meek}, {and} \bibinfo{person}{Thomas Richardson}.} \bibinfo{year}{1995}\natexlab{}.
+\newblock \showarticletitle{Causal Inference in the Presence of Latent Variables and Selection Bias}. In \bibinfo{booktitle}{\emph{Proceedings of the Eleventh Conference on Uncertainty in Artificial Intelligence}} \emph{(\bibinfo{series}{UAI'95})}. \bibinfo{pages}{499–506}.
+\newblock
+
+
+\bibitem[Thalheim et~al\mbox{.}(2017)]%
+        {thalheim2017sieve}
+\bibfield{author}{\bibinfo{person}{J{\"o}rg Thalheim}, \bibinfo{person}{Antonio Rodrigues}, \bibinfo{person}{Istemi~Ekin Akkus}, \bibinfo{person}{Pramod Bhatotia}, \bibinfo{person}{Ruichuan Chen}, \bibinfo{person}{Bimal Viswanath}, \bibinfo{person}{Lei Jiao}, {and} \bibinfo{person}{Christof Fetzer}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Sieve: Actionable insights from monitored metrics in distributed systems}. In \bibinfo{booktitle}{\emph{Proceedings of the 18th ACM/IFIP/USENIX Middleware Conference (Middleware'17)}}. \bibinfo{pages}{14--27}.
+\newblock
+
+
+\bibitem[van~den Burg and Williams(2020)]%
+        {Burg2022CPeval}
+\bibfield{author}{\bibinfo{person}{Gerrit J.~J. van~den Burg} {and} \bibinfo{person}{Christopher K.~I. Williams}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{An Evaluation of Change Point Detection Algorithms}.
+\newblock \bibinfo{journal}{\emph{CoRR}}  \bibinfo{volume}{abs/2003.06222} (\bibinfo{year}{2020}).
+\newblock
+
+
+\bibitem[Wang et~al\mbox{.}(2020)]%
+        {wang2020root}
+\bibfield{author}{\bibinfo{person}{Lingzhi Wang}, \bibinfo{person}{Nengwen Zhao}, \bibinfo{person}{Junjie Chen}, \bibinfo{person}{Pinnong Li}, \bibinfo{person}{Wenchi Zhang}, {and} \bibinfo{person}{Kaixin Sui}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Root-cause metric location for microservice systems via log anomaly detection}. In \bibinfo{booktitle}{\emph{2020 IEEE international conference on web services (ICWS)}}. IEEE, \bibinfo{pages}{142--150}.
+\newblock
+
+
+\bibitem[Wang et~al\mbox{.}(2018)]%
+        {Wang2018cloudranger}
+\bibfield{author}{\bibinfo{person}{Ping Wang}, \bibinfo{person}{Jingmin Xu}, \bibinfo{person}{Meng Ma}, \bibinfo{person}{Weilan Lin}, \bibinfo{person}{Disheng Pan}, \bibinfo{person}{Yuan Wang}, {and} \bibinfo{person}{Pengfei Chen}.} \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{CloudRanger: Root Cause Identification for Cloud Native Systems}. In \bibinfo{booktitle}{\emph{18th IEEE/ACM International Symposium on Cluster, Cloud and Grid Computing (CCGRID'18)}}. \bibinfo{pages}{492--502}.
+\newblock
+
+
+\bibitem[Wang et~al\mbox{.}(2021a)]%
+        {wang2021detecting}
+\bibfield{author}{\bibinfo{person}{Qing Wang}, \bibinfo{person}{Larisa Shwartz}, \bibinfo{person}{Genady~Ya Grabarnik}, \bibinfo{person}{Vijay Arya}, {and} \bibinfo{person}{Karthikeyan Shanmugam}.} \bibinfo{year}{2021}\natexlab{a}.
+\newblock \showarticletitle{Detecting causal structure on cloud application microservices using granger causality models}. In \bibinfo{booktitle}{\emph{2021 IEEE 14th International Conference on Cloud Computing (CLOUD)}}. IEEE, \bibinfo{pages}{558--565}.
+\newblock
+
+
+\bibitem[Wang et~al\mbox{.}(2021b)]%
+        {Wang2021evalcausal}
+\bibfield{author}{\bibinfo{person}{Qing Wang}, \bibinfo{person}{Larisa Shwartz}, \bibinfo{person}{Genady~Ya. Grabarnik}, \bibinfo{person}{Vijay Arya}, {and} \bibinfo{person}{Karthikeyan Shanmugam}.} \bibinfo{year}{2021}\natexlab{b}.
+\newblock \showarticletitle{Detecting Causal Structure on Cloud Application Microservices Using Granger Causality Models}. In \bibinfo{booktitle}{\emph{IEEE 14th International Conference on Cloud Computing (CLOUD'21)}}. \bibinfo{pages}{558--565}.
+\newblock
+
+
+\bibitem[Wohlin et~al\mbox{.}(2012)]%
+        {wohlin2012experimentation}
+\bibfield{author}{\bibinfo{person}{Claes Wohlin}, \bibinfo{person}{Per Runeson}, \bibinfo{person}{Martin H{\"o}st}, \bibinfo{person}{Magnus~C Ohlsson}, \bibinfo{person}{Bj{\"o}rn Regnell}, {and} \bibinfo{person}{Anders Wessl{\'e}n}.} \bibinfo{year}{2012}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Experimentation in software engineering}}.
+\newblock \bibinfo{publisher}{Springer Science \& Business Media}.
+\newblock
+
+
+\bibitem[Wu(2022)]%
+        {wu2022automatic}
+\bibfield{author}{\bibinfo{person}{Li Wu}.} \bibinfo{year}{2022}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Automatic performance diagnosis and recovery in cloud microservices}}.
+\newblock \bibinfo{publisher}{Technische Universitaet Berlin (Germany)}.
+\newblock
+
+
+\bibitem[Wu et~al\mbox{.}(2020a)]%
+        {wu2020performance}
+\bibfield{author}{\bibinfo{person}{Li Wu}, \bibinfo{person}{Jasmin Bogatinovski}, \bibinfo{person}{Sasho Nedelkoski}, \bibinfo{person}{Johan Tordsson}, {and} \bibinfo{person}{Odej Kao}.} \bibinfo{year}{2020}\natexlab{a}.
+\newblock \showarticletitle{Performance diagnosis in cloud microservices using deep learning}. In \bibinfo{booktitle}{\emph{International Conference on Service-Oriented Computing}}. Springer, \bibinfo{pages}{85--96}.
+\newblock
+
+
+\bibitem[Wu et~al\mbox{.}(2021)]%
+        {wu2021microdiag}
+\bibfield{author}{\bibinfo{person}{Li Wu}, \bibinfo{person}{Johan Tordsson}, \bibinfo{person}{Jasmin Bogatinovski}, \bibinfo{person}{Erik Elmroth}, {and} \bibinfo{person}{Odej Kao}.} \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{Microdiag: Fine-grained performance diagnosis for microservice systems}. In \bibinfo{booktitle}{\emph{2021 IEEE/ACM International Workshop on Cloud Intelligence (CloudIntelligence)}}. IEEE, \bibinfo{pages}{31--36}.
+\newblock
+
+
+\bibitem[Wu et~al\mbox{.}(2020b)]%
+        {wu2020microrca}
+\bibfield{author}{\bibinfo{person}{Li Wu}, \bibinfo{person}{Johan Tordsson}, \bibinfo{person}{Erik Elmroth}, {and} \bibinfo{person}{Odej Kao}.} \bibinfo{year}{2020}\natexlab{b}.
+\newblock \showarticletitle{Microrca: Root cause localization of performance issues in microservices}. In \bibinfo{booktitle}{\emph{NOMS 2020-2020 IEEE/IFIP Network Operations and Management Symposium}}. IEEE, \bibinfo{pages}{1--9}.
+\newblock
+
+
+\bibitem[Xin et~al\mbox{.}(2023)]%
+        {Xin2023CausalRCA}
+\bibfield{author}{\bibinfo{person}{Ruyue Xin}, \bibinfo{person}{Peng Chen}, {and} \bibinfo{person}{Zhiming Zhao}.} \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{CausalRCA: Causal inference based precise fine-grained root cause localization for microservice applications}.
+\newblock \bibinfo{journal}{\emph{Journal of Systems and Software}}  \bibinfo{volume}{203} (\bibinfo{year}{2023}), \bibinfo{pages}{111724}.
+\newblock
+
+
+\bibitem[Xuan and Murphy(2007)]%
+        {xuan2007modeling}
+\bibfield{author}{\bibinfo{person}{Xiang Xuan} {and} \bibinfo{person}{Kevin Murphy}.} \bibinfo{year}{2007}\natexlab{}.
+\newblock \showarticletitle{Modeling changing dependency structure in multivariate time series}. In \bibinfo{booktitle}{\emph{Proceedings of the 24th international conference on Machine learning}}. \bibinfo{pages}{1055--1062}.
+\newblock
+
+
+\bibitem[Yu et~al\mbox{.}(2021)]%
+        {yu2021microrank}
+\bibfield{author}{\bibinfo{person}{Guangba Yu}, \bibinfo{person}{Pengfei Chen}, \bibinfo{person}{Hongyang Chen}, \bibinfo{person}{Zijie Guan}, \bibinfo{person}{Zicheng Huang}, \bibinfo{person}{Linxiao Jing}, \bibinfo{person}{Tianjun Weng}, \bibinfo{person}{Xinmeng Sun}, {and} \bibinfo{person}{Xiaoyun Li}.} \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{Microrank: End-to-end latency issue localization with extended spectrum analysis in microservice environments}. In \bibinfo{booktitle}{\emph{Proceedings of the Web Conference (WWW'21)}}. \bibinfo{pages}{3087--3098}.
+\newblock
+
+
+\bibitem[Yu et~al\mbox{.}(2023)]%
+        {yu2023cmdiagnostor}
+\bibfield{author}{\bibinfo{person}{Qingyang Yu}, \bibinfo{person}{Changhua Pei}, \bibinfo{person}{Bowen Hao}, \bibinfo{person}{Mingjie Li}, \bibinfo{person}{Zeyan Li}, \bibinfo{person}{Shenglin Zhang}, \bibinfo{person}{Xianglin Lu}, \bibinfo{person}{Rui Wang}, \bibinfo{person}{Jiaqi Li}, \bibinfo{person}{Zhenyu Wu}, {et~al\mbox{.}}} \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{CMDiagnostor: An Ambiguity-Aware Root Cause Localization Approach Based on Call Metric Data}. In \bibinfo{booktitle}{\emph{Proceedings of the ACM Web Conference 2023}}. \bibinfo{pages}{2937--2947}.
+\newblock
+
+
+\bibitem[Yu et~al\mbox{.}(2019)]%
+        {Yu2019DagGNN}
+\bibfield{author}{\bibinfo{person}{Yue Yu}, \bibinfo{person}{Jie Chen}, \bibinfo{person}{Tian Gao}, {and} \bibinfo{person}{Mo Yu}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{{DAG}-{GNN}: {DAG} Structure Learning with Graph Neural Networks}. In \bibinfo{booktitle}{\emph{Proceedings of the 36th International Conference on Machine Learning (ICML'19)}}, Vol.~\bibinfo{volume}{97}. \bibinfo{pages}{7154--7163}.
+\newblock
+
+
+\bibitem[Zhang et~al\mbox{.}(1996)]%
+        {zhang1996birch}
+\bibfield{author}{\bibinfo{person}{Tian Zhang}, \bibinfo{person}{Raghu Ramakrishnan}, {and} \bibinfo{person}{Miron Livny}.} \bibinfo{year}{1996}\natexlab{}.
+\newblock \showarticletitle{BIRCH: an efficient data clustering method for very large databases}.
+\newblock \bibinfo{journal}{\emph{ACM sigmod record}} \bibinfo{volume}{25}, \bibinfo{number}{2} (\bibinfo{year}{1996}), \bibinfo{pages}{103--114}.
+\newblock
+
+
+\bibitem[Zhou et~al\mbox{.}(2018)]%
+        {zhou2018trainticket}
+\bibfield{author}{\bibinfo{person}{Xiang Zhou}, \bibinfo{person}{Xin Peng}, \bibinfo{person}{Tao Xie}, \bibinfo{person}{Jun Sun}, \bibinfo{person}{Chao Ji}, \bibinfo{person}{Wenhai Li}, {and} \bibinfo{person}{Dan Ding}.} \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{Fault analysis and debugging of microservice systems: Industrial survey, benchmark system, and empirical study}.
+\newblock \bibinfo{journal}{\emph{IEEE Transactions on Software Engineering}} \bibinfo{volume}{47}, \bibinfo{number}{2} (\bibinfo{year}{2018}), \bibinfo{pages}{243--260}.
+\newblock
+
+
+\end{thebibliography}

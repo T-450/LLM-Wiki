@@ -1,0 +1,165 @@
+Aiming at different issues that affect the high availability of microservice system, \app~adopts different anomaly detection models according to different metrics characteristics and the actual situation of online fault data.
+It is mainly composed of reliability issue detection model, performance issue detection model and traffic issue detection model. The main methods used are Random Forest(RF), three-sigma rule of thumb(3Sigma), One-class Support Vector Machines(OC-SVM)\cite{ocsvm}.
+
+\subsubsection{Reliability issue detection model}
+For reliability issue, \app~mainly uses RF for anomaly detection, RF is an algorithm that integrates multiple trees through the idea of ensemble learning.
+Its basic unit is a decision tree, and each decision tree is a classifier.
+In this paper, EC metrics is mainly used for reliability issue, and offline data are labeled as the basis for classification.
+
+The reason for choosing RF in this paper is that it can works well even when the fault cases available for training is small in the online system.
+Notice that, the EC metrics feature is 0 most of the time in the online environment, as shown in Figure \ref{fig:error-count-time}, Even if there are individual errors in services sometimes, if they do not affect the business, such errors will not cause the alarm to be generated.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.45\textwidth]{images/error-count-time.png}
+	\vspace{-8pt}
+	\caption{Change of Error Count Over Time}\label{fig:error-count-time}
+	\vspace{-8pt}
+\end{figure}
+
+In this case, it is easy to be misjudged as an abnormality as long as there is a small jitter if unsupervised methods like OC-SVM are used.
+Therefor, binary classification models like Logic Regression(LR) or RF can be used.
+However, for the reason that the small amount fault cases labeled of the online system, overfitting is likely to occur when use LR model, LR model is essentially a linear model and does not consider the interaction between features.
+The use of RF is equivalent to using multiple decision trees for classification, which can effectively comprehensively consider multiple features and avoid overfitting; it is more suitable for the detection scenarios of metrics like EC that affect the reliability of the microservice system.
+The features extracted by \app~for reliability issues are shown in Table \ref{tab:reliability_features}.
+
+\begin{table}[ht]
+	\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+	\caption{Features for Reliability Issues}
+	\label{tab:reliability_features}
+    \small
+	\centering
+	\resizebox{0.48\textwidth}{!}{
+		\begin{tabular}{|c|c|}
+			\hline \textbf{Feature} & \textbf{Description} \\
+			\hline SR  & month on month residual of EC(through 3Sigma) \\
+			\hline RR  & year on year residual of EC(through 3Sigma) \\
+			\hline RT  & whether RT is greater then threshold(e.g., 50ms)   \\
+			\hline MER & maximum error rate calculated by QPS and EC  \\
+            \hline CER & correlation value of RT and EC \\
+			\hline
+		\end{tabular}
+	}
+	\vspace{-8pt}
+\end{table}
+
+RT is also extracted in the reliability issue detection model for the reason that RT and EC are usually related.
+For example, the response time of RPC request is timed out, which will cause timeout exception in the log.
+The reason why we do not directly use 3Sigma to detect whether EC is abnormal is because 3Sigma assumes that the data is in a normal distribution, when the amount of data in the detection  window is not large enough, it is easy to cause false positive due to small jitter; or it is not applicable when the abnormality lasts for a long time and the metric fluctuates little.
+Therefor, inputting the 3Sigma-assisted features into RF as prior knowledge is similar to a heuristic strategy that can further improve the accuracy.
+
+The training set of the RF model comes from the 1000 historical fault cases of labeled reliability issue from online services, the ratio of positive and negative samples is 1:3; the test set is 400 labeled fault cases and the ratio of positive and negative samples is 5:3.
+In the process of training, we verifies that the accuracy of RF varies with the different coverage of training set, as shown in Table \ref{tab:reliability_train}.
+
+\begin{table}[ht]
+	\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+	\caption{Accuracy with The Train Set Coverage}
+	\label{tab:reliability_train}
+    \small
+	\centering
+	\resizebox{0.48\textwidth}{!}{
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline \textbf{Coverage} & \textbf{Recall} & \textbf{Precision} & \textbf{F1} & \textbf{FPR}\\
+			\hline 10\%  &  0.29 & 1    & 0.44 & 0.70 \\
+			\hline 20\%  &  0.64 & 1    & 0.78 & 0.35 \\
+            \hline 30\%  &  0.64 & 1    & 0.78 & 0.35 \\
+			\hline 40\%  &  0.86 & 0.97 & 0.91 & 0.14 \\
+			\hline 50\%  &  0.88 & 0.95 & 0.91 & 0.12 \\
+            \hline 60\%  &  0.88 & 0.90 & 0.89 & 0.12 \\
+			\hline 70\%  &  0.93 & 0.90 & 0.92 & 0.09 \\
+			\hline 80\%  &  0.95 & 0.95 & 0.94 & 0.07 \\
+            \hline 90\%  &  0.95 & 0.95 & 0.95 & 0.04 \\
+            \hline 100\% &  0.98 & 0.93 & 0.95 & 0.02 \\
+			\hline
+		\end{tabular}
+	}
+	\vspace{-8pt}
+\end{table}
+
+\subsubsection{Performance issue detection model}
+For performance issue, \app~mainly uses OC-SVM for anomaly detection.
+Traditional SVM is a support vector machine for classifying tow or more categories, while OC-SVM is a single-category support vector machine.
+The reason for choosing OC-SVM in this paper is that the fault cases available in the online system is relatively small, and it is expensive or impossible to collect a large amount of abnormal fault cases.
+However, there are a large number of normal RT data set in the online system.
+By only providing normal training set, OC-SVM can fit this range according to the normal data set, and time within this error range will be considered normal.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.45\textwidth]{images/rt-time.png}
+	\vspace{-8pt}
+	\caption{Change of Response Time Over Time}\label{fig:rt-time}
+	\vspace{-10pt}
+\end{figure}
+
+As shown in Figure \ref{fig:rt-time}, RT of RPC request is around 30 ms most of the time, unlike EC which is always 0, but RT has daily fluctuations.
+For example, when traffic exceeds the processing capacity of the server, it will result in performance degradation and longer RT; in the circuit breaker scenario, RT will be significantly shorter due to the existence of rapid failure; both too long or too short of RT may be considered abnormal.
+And RT is periodic, such as a take-out system, RT becomes longer due to the increase of users at lunch or dinner time.
+Therefor, considering periodicity is of great significance for detecting whether there is an abnormal RT.
+The features extracted by \app~for performance issues are shown in Table \ref{tab:performance_features}.
+
+\begin{table}[ht]
+	\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+	\caption{Features for Performance Issues}
+	\label{tab:performance_features}
+    \small
+	\centering
+	\resizebox{0.48\textwidth}{!}{
+		\begin{tabular}{|c|c|}
+			\hline \textbf{Feature} & \textbf{Description} \\
+			\hline NCM  & \makecell[c]{number of the maximum value in the time window greater then the \\ maximum value in the day-on-year and week-on-year data}  \\
+			\hline TT  & \makecell[c]{D-value between the maximum value in the time window and the \\ maximum value in the day-on-year and week-on-year data}  \\
+			\hline NCM  & \makecell[c]{number of values in the time window that are greater then the \\ maximum value of the day-on-year and week-on-year moving average} \\
+			\hline MC & \makecell[c]{ ratio of the mean value of time window to the \\ maximum value of the day-on-year and week-on-year moving average}   \\
+			\hline
+		\end{tabular}
+	}
+	\vspace{-8pt}
+\end{table}
+
+The training set of the OC-SVM model comes from the 100000 historical RT data with no abnormality of the online system, and the trained model is used for abnormal detection of performance issue of online service.
+The test set is 603 labeled fault cases comes from the online system too, and the ratio of positive and negative samples is 1:1.
+In the process of training, we also verifies that the accuracy of OC-SVM model varies with the different coverage of training set, as shown in Table \ref{tab:performance_train}.
+\begin{table}[ht]
+	\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+	\caption{Accuracy with The Train Set Coverage}
+	\label{tab:performance_train}
+    \small
+	\centering
+	\resizebox{0.48\textwidth}{!}{
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline \textbf{Coverage} & \textbf{Recall} & \textbf{Precision} & \textbf{F1} & \textbf{FPR}\\
+			\hline 10\%  &  0.86 & 0.73 & 0.79 & 0.32 \\
+			\hline 20\%  &  0.81 & 0.88 & 0.84 & 0.12 \\
+            \hline 30\%  &  0.82 & 0.92 & 0.87 & 0.07 \\
+			\hline 40\%  &  0.83 & 0.92 & 0.87 & 0.08 \\
+			\hline 50\%  &  0.84 & 0.94 & 0.89 & 0.06 \\
+            \hline 60\%  &  0.83 & 0.94 & 0.88 & 0.06 \\
+			\hline 70\%  &  0.86 & 0.95 & 0.90 & 0.05 \\
+			\hline 80\%  &  0.87 & 0.95 & 0.91 & 0.05 \\
+            \hline 90\%  &  0.87 & 0.95 & 0.91 & 0.04 \\
+            \hline 100\% &  0.87 & 0.96 & 0.91 & 0.03 \\
+			\hline
+		\end{tabular}
+	}
+	\vspace{-8pt}
+\end{table}
+
+
+\subsubsection{Traffic issue detection model}
+For traffic issue, \app~uses 3Sigma and Pearson correlation coefficient for anomaly detection.
+As shown in Figure \ref{fig:qps-time}, QPS is more in line with the characteristics of normal distribution, 3Sigam represents that 99.73\% of the data is distributed in the range of negative 3Sigma to positive 3Sigma, these data are considered to fluctuate within the normal range, and the data beyond this range are considered abnormal.
+
+In this paper, we take the QPS one hour before the alarm occurs on the edge as the detection data, and calculate the mean and variance with the data of the previous 50 minutes, then use 3Sigma to perform anomaly detection based on the last 10 minutes data.
+If a value of QPS is not within the 3Sigma interval of the last 10 minutes, we think this service may have traffic issue.
+However, we observed that 3Sigma is still prone to false positives, therefore, we calculate the correlation score between QPS of the current node and the metrics that triggers the alarm based on Pearson correlation coefficient.
+Only when the score is higher then a certain threshold(e.g., 0.9), it will be finally confirmed that there is a traffic issue exists in this service.
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.45\textwidth]{images/qps-time.png}
+	\vspace{-8pt}
+	\caption{Change of QPS Over Time}\label{fig:qps-time}
+	\vspace{-10pt}
+\end{figure}
+
+

@@ -1,0 +1,65 @@
+Reliability anomaly is detected based on the anomalous increase of error counts (EC).
+As shown in Figure~\ref{fig:EC-2-hour} and Figure~\ref{fig:EC-week}, the value of EC is 0 most of the time.
+In some cases, even when some errors are raised there is no influence on the business and the service may get back to normal in a short time.
+For example, service calls fail and errors are raised when the circuit break is open, but the service will get back to normal soon after the load decreases and the circuit break is closed.
+Therefore, we cannot use the performance anomaly detection model to detect reliability anomalies.
+Binary classification models like Logic Regression (LR) or Random Forest (RF) can be used.
+However, as only a small number of EC changes are reliability anomalies, LR models are likely to cause overfitting.
+
+Based on the characteristics of EC, we choose to use Random Forest (RF) to train a prediction model for anomalous EC increases.
+RF uses multiple decision trees for classification.
+It can effectively combine multiple features and avoid overfitting.
+We define and use the following five features for the model.
+Note that some of the features combine other metrics (e.g., RT, QPS) together with EC, as anomalous EC increases often correlate with RT and QPS.
+Similar to performance anomaly detection, we consider the last 10 minutes as the current detection window.
+
+%At the same time, we use RT in reliability anomaly detection, because we found that in the actual system RT and EC are related, for example an interface response timeout anomaly may cause timeout exception information in the log.
+%We use Threshold and Correlation to reflect the relationship between RT and EC.
+%In the otherwise, we use MaxErrorRate that calculated by QPS and EC to reflect the maximum error rate in the detection window.
+
+\begin{itemize}
+\item \textbf{Previous Day Delta Outlier Value}: calculate the deltas of the EC values in the last one hour and the EC values in the same hour of the previous day; use the 3-sigma rule to identify possible outliers of the deltas in the current detection window; if exist return the average of the outliers as the feature value, otherwise return 0.
+
+\item \textbf{Previous Minute Delta Outlier Value}: 
+calculate the deltas of the EC values and the values of the previous minute in the last one hour; 
+use the 3-sigma rule to identify possible outliers of the deltas in the current detection window; 
+if exist return the average of the outliers as the feature value, otherwise return 0.
+
+\item \textbf{Response Time Over Threshold}: whether the average RT in the current detection window exceeds a predefined threshold (e.g., 50ms).
+
+\item \textbf{Maximum Error Rate}: the maximum error rate (i.e., EC divided by number of requests) in the current detection window.
+
+\item \textbf{Correlation with Response Time}: the Pearson correlation coefficient (see Equation~\ref{eq:pearson}) between EC and RT in the current detection window.
+
+\end{itemize}
+
+We use the Python based machine learning framework scikit-learn~\cite{scikitLearn} to implement the model.
+To train the model, we collect 1,000 labelled cases of different services from the monitoring infrastructure of Alibaba and the ratio of positive and negative samples is 1:3.
+We also collect 400 cases for verifying the trained model and the ratio of positive and negative samples is 5:3.
+The results of the verification are shown in Table~\ref{tab:reliability_train}, which provide the recall, precision,
+F1-measure, FPR (False Positive Rate) of reliability anomaly detection with different coverage of the training set.
+It can be seen that the model can accurately detect reliability anomalies with only 20\% of the training set, and it can achieve very high accuracy when using 40\% of the training set.
+
+\begin{table}[ht]
+	\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+	\caption{Accuracy of Reliability Anomaly Detection}
+	\label{tab:reliability_train}
+    \small
+	\centering
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline \textbf{Coverage} & \textbf{Recall} & \textbf{Precision} & \textbf{F1} & \textbf{FPR}\\
+			\hline 10\%  &  0.29 & 1    & 0.44 & 0.70 \\
+			\hline 20\%  &  0.64 & 1    & 0.78 & 0.35 \\
+            \hline 30\%  &  0.64 & 1    & 0.78 & 0.35 \\
+			\hline 40\%  &  0.86 & 0.97 & 0.91 & 0.14 \\
+			\hline 50\%  &  0.88 & 0.95 & 0.91 & 0.12 \\
+            \hline 60\%  &  0.88 & 0.90 & 0.89 & 0.12 \\
+			\hline 70\%  &  0.93 & 0.90 & 0.92 & 0.09 \\
+			\hline 80\%  &  0.95 & 0.95 & 0.94 & 0.07 \\
+            \hline 90\%  &  0.95 & 0.95 & 0.95 & 0.04 \\
+            \hline 100\% &  0.98 & 0.93 & 0.95 & 0.02 \\
+			\hline
+		\end{tabular}
+	\vspace{-3pt}
+\end{table}
+

@@ -1,0 +1,427 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1775780962376,
+  "projectRoot": "/home/t450/t450@workspace/LLM-Wiki",
+  "techStack": {
+    "languages": [
+      {
+        "name": "Python",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "requirements.txt"
+        ]
+      }
+    ],
+    "frameworks": [],
+    "packageManager": "pip",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "assets",
+      "tests"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "assets": {
+      "path": "assets",
+      "purpose": "Static assets",
+      "fileCount": 3,
+      "lastAccessed": 1775780962373,
+      "keyFiles": [
+        "architecture.png",
+        "logo.png",
+        "wechat-group.jpg"
+      ]
+    },
+    "config": {
+      "path": "config",
+      "purpose": "Configuration files",
+      "fileCount": 4,
+      "lastAccessed": 1775780962374,
+      "keyFiles": [
+        "README.md",
+        "server.yaml.example",
+        "settings.local.json.example"
+      ]
+    },
+    "i18n": {
+      "path": "i18n",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1775780962375,
+      "keyFiles": []
+    },
+    "mcp-servers": {
+      "path": "mcp-servers",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1775780962375,
+      "keyFiles": []
+    },
+    "raw": {
+      "path": "raw",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1775780962375,
+      "keyFiles": []
+    },
+    "tests": {
+      "path": "tests",
+      "purpose": "Test files",
+      "fileCount": 28,
+      "lastAccessed": 1775780962375,
+      "keyFiles": [
+        "conftest.py",
+        "test_fetch_arxiv.py",
+        "test_fetch_deepxiv.py",
+        "test_fetch_s2.py",
+        "test_lint.py"
+      ]
+    },
+    "tools": {
+      "path": "tools",
+      "purpose": null,
+      "fileCount": 7,
+      "lastAccessed": 1775780962376,
+      "keyFiles": [
+        "_env.py",
+        "fetch_arxiv.py",
+        "fetch_deepxiv.py",
+        "fetch_s2.py",
+        "lint.py"
+      ]
+    },
+    "wiki": {
+      "path": "wiki",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1775780962376,
+      "keyFiles": [
+        "index.md",
+        "log.md"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "wiki/concepts/causality-graph-rca.md",
+      "accessCount": 14,
+      "lastAccessed": 1775784538426,
+      "type": "file"
+    },
+    {
+      "path": "wiki/claims/ad-rca-pipeline-gap.md",
+      "accessCount": 13,
+      "lastAccessed": 1775783139709,
+      "type": "file"
+    },
+    {
+      "path": "wiki/topics/root-cause-analysis-microservices.md",
+      "accessCount": 13,
+      "lastAccessed": 1775784542827,
+      "type": "file"
+    },
+    {
+      "path": "wiki/topics/anomaly-detection-cloud-native-systems.md",
+      "accessCount": 8,
+      "lastAccessed": 1775783162886,
+      "type": "file"
+    },
+    {
+      "path": ".claude/skills/ingest/SKILL.md",
+      "accessCount": 7,
+      "lastAccessed": 1775784987518,
+      "type": "file"
+    },
+    {
+      "path": "wiki/concepts/log-based-anomaly-detection.md",
+      "accessCount": 6,
+      "lastAccessed": 1775782178148,
+      "type": "file"
+    },
+    {
+      "path": "wiki/claims/joint-anomaly-detection-root-cause-localization.md",
+      "accessCount": 6,
+      "lastAccessed": 1775783700064,
+      "type": "file"
+    },
+    {
+      "path": "wiki/papers/anomaly-detection-failure-root-cause-analysis.md",
+      "accessCount": 5,
+      "lastAccessed": 1775782185802,
+      "type": "file"
+    },
+    {
+      "path": "wiki/index.md",
+      "accessCount": 4,
+      "lastAccessed": 1775781727066,
+      "type": "file"
+    },
+    {
+      "path": "wiki/topics/observability-engineering-tooling.md",
+      "accessCount": 3,
+      "lastAccessed": 1775781882573,
+      "type": "file"
+    },
+    {
+      "path": "wiki/claims/ml-retraining-cost-accuracy-tradeoff.md",
+      "accessCount": 3,
+      "lastAccessed": 1775782014974,
+      "type": "file"
+    },
+    {
+      "path": "wiki/claims/explainability-gap-aiops.md",
+      "accessCount": 3,
+      "lastAccessed": 1775782016108,
+      "type": "file"
+    },
+    {
+      "path": "wiki/people/jacopo-soldani.md",
+      "accessCount": 2,
+      "lastAccessed": 1775781730970,
+      "type": "file"
+    },
+    {
+      "path": "wiki/log.md",
+      "accessCount": 2,
+      "lastAccessed": 1775781731520,
+      "type": "file"
+    },
+    {
+      "path": "wiki/people/michael-lyu.md",
+      "accessCount": 2,
+      "lastAccessed": 1775782668009,
+      "type": "file"
+    },
+    {
+      "path": "wiki/concepts/multi-modal-observability-fusion.md",
+      "accessCount": 2,
+      "lastAccessed": 1775782668547,
+      "type": "file"
+    },
+    {
+      "path": "tools/fetch_s2.py",
+      "accessCount": 1,
+      "lastAccessed": 1775781139840,
+      "type": "file"
+    },
+    {
+      "path": "wiki/Summary/observability-cloud-native-microservices.md",
+      "accessCount": 1,
+      "lastAccessed": 1775781284328,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/anomaly-detection-failure-root-cause-analysis/main.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775781437082,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/anomaly-detection-failure-root-cause-analysis/src/1-intro.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775781451057,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/anomaly-detection-failure-root-cause-analysis/src/2-terminology.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775781451620,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/anomaly-detection-failure-root-cause-analysis/src/6-conclusions.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775781452457,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/anomaly-detection-failure-root-cause-analysis/src/3-detection.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775781462238,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/anomaly-detection-failure-root-cause-analysis/src/4-root-cause.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775781463100,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/anomaly-detection-failure-root-cause-analysis/src/5-related.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775781463344,
+      "type": "file"
+    },
+    {
+      "path": "wiki/graph/edges.jsonl",
+      "accessCount": 1,
+      "lastAccessed": 1775781474356,
+      "type": "file"
+    },
+    {
+      "path": "wiki/claims/organizational-gaps-outweigh-technical-gaps-observability.md",
+      "accessCount": 1,
+      "lastAccessed": 1775781828933,
+      "type": "file"
+    },
+    {
+      "path": "wiki/claims/ai-prerequisites-unmet-observability-practice.md",
+      "accessCount": 1,
+      "lastAccessed": 1775781851163,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/eadro-end-end-troubleshooting-framework-microservices/bare_conf.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775781970022,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/eadro-end-end-troubleshooting-framework-microservices/sections/0-abstract.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775781984071,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/eadro-end-end-troubleshooting-framework-microservices/sections/1-introduction.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775781986199,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/eadro-end-end-troubleshooting-framework-microservices/sections/2-background.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775781986450,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/eadro-end-end-troubleshooting-framework-microservices/sections/3-motivation.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775781986789,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/eadro-end-end-troubleshooting-framework-microservices/sections/4-methodology.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775781987062,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/eadro-end-end-troubleshooting-framework-microservices/sections/5-evaluation.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775781987120,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/eadro-end-end-troubleshooting-framework-microservices/sections/7-discussion.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775781987301,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/eadro-end-end-troubleshooting-framework-microservices/sections/8-literature.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775781989107,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/eadro-end-end-troubleshooting-framework-microservices/sections/9-conclusion.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775781989927,
+      "type": "file"
+    },
+    {
+      "path": "wiki/papers/eadro-end-end-troubleshooting-framework-microservices.md",
+      "accessCount": 1,
+      "lastAccessed": 1775782071224,
+      "type": "file"
+    },
+    {
+      "path": "wiki/claims/multi-source-data-improves-microservice-troubleshooting.md",
+      "accessCount": 1,
+      "lastAccessed": 1775782085693,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/microhecl-high-efficient-root-cause-localization/reference.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775782630210,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/microhecl-high-efficient-root-cause-localization/introduction.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775782630770,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/microhecl-high-efficient-root-cause-localization/overview.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775782631152,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/microhecl-high-efficient-root-cause-localization/propagation.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775782642901,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/microhecl-high-efficient-root-cause-localization/experiment.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775782643837,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/microhecl-high-efficient-root-cause-localization/background.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775782644297,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/microhecl-high-efficient-root-cause-localization/related.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775782644785,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/microhecl-high-efficient-root-cause-localization/application.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775782645879,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/microhecl-high-efficient-root-cause-localization/conclusion.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775782647005,
+      "type": "file"
+    },
+    {
+      "path": "raw/papers/microhecl-high-efficient-root-cause-localization/setup.tex",
+      "accessCount": 1,
+      "lastAccessed": 1775782656531,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

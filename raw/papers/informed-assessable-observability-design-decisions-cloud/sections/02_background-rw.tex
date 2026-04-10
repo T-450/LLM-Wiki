@@ -1,0 +1,29 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+When faults occur in complex microservice compositions, they can be more complicated to identify than in traditional monoliths, so observability practices have evolved accordingly (e.g., \cite{2010_Sigelman_Dapper,Li_ServiceMesh_2019,Kaldor_Canopy_2017}) and observability remains a growing subject in reliability literature. Multiple design decisions have to be made when implementing and using observability tooling. Different model-driven approaches have been proposed to automate the implementation of observability designs  \cite{Klein_ModelDrivenObservability_2016,Phipathananunth_SyntheticModelBasedMonitroingMicroservices_2018}, yet none of these approaches help practitioners arrive at appropriate and assessable decisions.
+
+Observability design decisions have significant consequences because, as Niedermeier et al. \cite{Niedermaier_ObservabilityInterviewStudy_2019} point out, ``careless deployment and configuration of monitoring agents have been mentioned as potential problems which might cause instability and an increasing network load". So far, different approaches have been proposed to deal with this design challenge.
+
+Haselböck and Weinreich \cite{Haselboeck_DecisionModelMicroservices_2017} propose decision guidance models for microservice observability decisions. These models help developers with the more abstract high-level decisions, e.g., what tool to adopt when the goal is to inspect service interactions. The model serves well as an introductory resource, but it can't provide assistance with more intricate configuration or instrumentation decisions. For instance, it does not offer guidance on selecting appropriate metrics or determining the ideal sampling rate. In a similar vein, \cite{Sambasivan_TracingDesignChoices_2016} provide best practices for supporting tracing design decisions. Besides these guides, developers can also refer to surveys like \cite{Janes_TracingQualitativeAnalysis_2022} for making decisions, where observability tools are compared based on a number of different qualitative criteria. 
+
+Some research also addresses observability design trade-offs, in particular the costs or performance overhead incurred. Ernst and Tai \cite{Ernst_OfflineTraceGeneration_2021} propose an offline approach to tracing overhead assessment. The model-based approach generates realistic trace data, which can then be used as a workload against different tracing backends. A concrete benchmark of observability instrumentation has also been conducted by \cite{Reichelt_OverheadOpenTelemetryEtc}. Here, the researchers propose a tool for continuous measurement of the overhead of popular instrumentation libraries like \textsc{OpenTelemetry} and \textsc{Kieker}. More recently, the energy efficiency of observability tools has also been investigated \cite{Dinga_EnergyEfficiencyOfMonitoring_2023}. The researchers discovered a close association between observability-related energy consumption and performance overhead, an outcome that was anticipated.
+All three of these papers address the drawbacks of observability but overlook the advantages it offers. It is not feasible to evaluate trade-offs without understanding the value provided by something.
+
+Our work is the first to guide observability design choices through comparative measurement of its effectiveness. Ahmed et al. \cite{Ahmed_EffectivenessOfAPM_2016} did similar work, as they measure how effective four different monitoring tools are at identifying performance regressions.  However, their work primarily focuses on comparing the tools without delving into the details of instrumentation and configuration decisions necessary for implementing each tool, as only the default configuration and out-of-the-box automatic instrumentation is used for the assessment.
+Another promising approach to improving resilience and testing the configuration of the observability systems is Chaos Engineering. It provides a method  \cite{Basiri_ChaosEngineeringPrinciples_2016} and tools \cite{Heorhiadi_GremlinChaosEngineering_2016,Meiklejohn_FillibusterChaosEngineering_2021,Simonsson_ChaosOrca_2021,Zhang_PhoebeChaosEngineering_2022,Zhang_PhoebeChaosEngineering_2022} for carrying out resilience experiments. Here, faults are injected into a running microservice system to test a hypothesis on the systems ability to withstand these faults. 
+However, this approach presupposes a sufficient level of observability prior to conducting the experiments and does not offer any guidance on how to achieve this.
+
+Lastly, Nedelkoski et al. \cite{Nedelkoski_MultiSourceSyntheticData_2020} highlight the lack of datasets incorporating telemetry data from diverse sources (metrics, traces, logs). They propose a solution by developing a microservice system that simulates injected faults, enabling the creation of new datasets, similar to our approach. 
+Unfortunately, the system's inability to change or configure observability and specific telemetry instrumentation points greatly limits its ability to assess observability effectiveness.

@@ -1,0 +1,9 @@
+Observability is important to ensure the reliability of microservice applications. These applications are often prone to failures, since they have many independent services deployed on heterogeneous environments. When employed “correctly“, observability can help developers identify and troubleshoot faults quickly. However, %
+instrumenting and configuring the observability of a microservice application is not trivial but tool-dependent and tied to costs. 
+Architects need to understand observability-related trade-offs in order to weigh between different observability design alternatives. 
+Still, these architectural design decisions are not supported by systematic methods and typically just rely on ``professional intuition".  
+
+In this paper, we argue for a systematic method to arrive at informed and continuously assessable observability design decisions. Specifically, we focus on fault observability of cloud-native microservice applications, and turn this into a testable and quantifiable property. %
+Towards our goal, we first model the scale and scope of observability design decisions across the cloud-native stack. Then, we propose observability metrics which can be determined for any microservice application through so-called observability experiments. We present a proof-of-concept implementation of our experiment tool \name{}. \name{} is able to inject arbitrary faults into an application, similar to Chaos Engineering, but also possesses the unique capability to modify the observability configuration, allowing for the assessment of design decisions that were previously left unexplored. %
+We demonstrate our approach using a popular open source microservice application and show the trade-offs involved in different observability design decisions.
+

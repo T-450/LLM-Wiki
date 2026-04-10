@@ -1,0 +1,38 @@
+\app~has been implemented and deployed as a distributed system in Alibaba based on EagleEye and other infrastructures.
+To support finer-grained localization, the system also considers local middleware components (including databases, message queues, caches) of services as the targets of localization.
+These components and their interactions with services are incorporated into the service call graph and the quality metrics of the interactions are also recorded for analysis.
+%For example, we will check the times of Full GC for JVM anomaly, the agent online rate for server outage, the TCP retransmission rate for network outage, the number of database connection and slow SQL for database anomaly, etc..
+
+\app~has been deployed in Alibaba for more than 5 months and used to handle more than 600 availability issues.
+For each availability issue the system recommends the top-3 candidate root causes for the developers.
+Before the application of \app, the developers needs to use the service call graph visualization and quality metrics analysis provided by the web interfaces of EagleEye to manually identify possible root causes.
+For each availability issue, the typical time of root cause localization and confirmation is over 30 minutes.
+With \app, the system can produce root cause recommendations in 76 seconds on average and the developers usually can confirm the results and start fault repairing and recovery in 5 minutes after an availability issue is detected.
+The hit ratio (i.e., HR@3) of \app~is 68\%.
+Feedback from the developers shows that most of them trust the recommendations of the system and treat the recommendations as the root causes by default.
+
+%Statistics show that \app~plays an important role in root cause localization of availability issues in Alibaba.
+%Furthermore, there are also some drawbacks which have not been solved in practice.
+%%However, in the practice of enterprises, we also encountered some problems that have not been solved yet.
+%For example, there are false negatives and false positives for the algorithm models due to a few availability issues for training.
+%While it costs a lot to manually inject defects and collect the issues for training in production environment.
+%%the cost of manually injecting faults to collect training data is very high and almost impossible.
+%Therefor, we plan to continuously optimize the models with the accumulation of availability issues raised from the business monitoring platform in production environment.
+%%For this problem, our solution is to continuously optimize the model along with the accumulation of alarm cases labeled, thereby further improving the accuracy of anomaly detection.
+%
+
+We analyze the cases for which \app~cannot accurately recommend the root causes and find that the approach and the system need to be improved from multiple aspects.
+First, it is possible that availability issues are detected but there are no anomalies with the quality metrics of services.
+Second, anomalous fluctuations may accumulate slowly and exceed the predefined time window.
+For example, an anomalous fluctuation may start more than one hour before an availability issue is detected, thus the anomalous fluctuation may not be detected by considering the changes of quality metrics in the last one hour.
+More advanced techniques are required to improve the current approach.
+
+
+%\emph{3)} Algorithm models hava false negatives and false positives.
+%Due to a few availability issues for training, and it costs a lot to manually inject defects and collect the issues for training in production environment.
+%Therefor, we plan to continuously optimize the models with the accumulation of availability issues raised from the business monitoring platform in production environment.
+
+
+%Because there are relatively few alarm cases available for training at present, moreover, int the online environment, the cost of manually injecting faults to collect training data is very high and almost impossible.
+%The detection model itself has defects, which leads to false negatives and false positives.
+%For the last problem we faced, the solution is to continuously optimize the model along with the accumulation of alarm cases labeled, thereby further improving the accuracy of anomaly detection.

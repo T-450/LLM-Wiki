@@ -1,0 +1,69 @@
+{
+  "agents": [
+    {
+      "agent_id": "ab2539f9d4d517314",
+      "agent_type": "general-purpose",
+      "started_at": "2026-04-10T00:37:02.064Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-04-10T00:41:16.583Z",
+      "duration_ms": 254519
+    },
+    {
+      "agent_id": "ad69f6306a65da2e1",
+      "agent_type": "general-purpose",
+      "started_at": "2026-04-10T00:41:37.274Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-04-10T00:45:32.220Z",
+      "duration_ms": 234946
+    },
+    {
+      "agent_id": "ac8edb64ab76148ee",
+      "agent_type": "general-purpose",
+      "started_at": "2026-04-10T00:45:50.144Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-04-10T00:50:24.676Z",
+      "duration_ms": 274532
+    },
+    {
+      "agent_id": "a192d9853d730d40f",
+      "agent_type": "general-purpose",
+      "started_at": "2026-04-10T00:56:50.782Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-04-10T01:00:58.845Z",
+      "duration_ms": 248063
+    },
+    {
+      "agent_id": "a877b0d41d47a3cad",
+      "agent_type": "general-purpose",
+      "started_at": "2026-04-10T01:02:49.167Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-04-10T01:06:46.190Z",
+      "duration_ms": 237023
+    },
+    {
+      "agent_id": "ad3200d09bcf88f99",
+      "agent_type": "general-purpose",
+      "started_at": "2026-04-10T01:08:53.861Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-04-10T01:35:50.593Z",
+      "duration_ms": 1616732
+    },
+    {
+      "agent_id": "a7f6adcd67d5edb61",
+      "agent_type": "general-purpose",
+      "started_at": "2026-04-10T01:36:23.651Z",
+      "parent_mode": "none",
+      "status": "running"
+    }
+  ],
+  "total_spawned": 7,
+  "total_completed": 6,
+  "total_failed": 0,
+  "last_updated": "2026-04-10T01:36:23.752Z"
+}

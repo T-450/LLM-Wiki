@@ -1,0 +1,12 @@
+{
+  "task_id": "init-session",
+  "completed": [
+    "anomaly-detection-failure-root-cause-analysis",
+    "observability-monitoring-distributed-systems-industry-interview",
+    "eadro-end-end-troubleshooting-framework-microservices",
+    "microhecl-high-efficient-root-cause-localization",
+    "baro-robust-root-cause-analysis-microservices",
+    "causal-inference-based-root-cause-analysis"
+  ],
+  "failed": []
+}

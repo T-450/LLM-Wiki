@@ -1,0 +1,19 @@
+\newcounter{treatmentsFoodnoteCounter}
+\setcounter{treatmentsFoodnoteCounter}{\value{footnote}} \centering
+\newcommand{\rightIndent}{\hspace{0.2cm}}
+\begin{tabular}{lp{0.6\columnwidth}l}
+    Name & Purpose & Tool \\ \hline
+    \multicolumn{3}{l}{\textbf{Fault Treatment:}} \\
+    \rightIndent{}Pause & Simulates an unresponsive service by suspending all processes in a service & \textsc{Docker} \\
+    \rightIndent{}Kill & Simulates a service crash & \textsc{Docker} \\
+    \rightIndent{}NetworkDelay & Injects network delay on an interface & \textsc{tc\footnotemark} \\
+    \rightIndent{}PacketLoss & Injects packet loss on an interface & \textsc{tc} \\
+    \rightIndent{}PacketCorruption & Injects packet corruption on an interface & \textsc{tc} \\
+    \rightIndent{}Stress & Simulates resource exhaustion by injecting stressors & \textsc{stress-ng\footnotemark} \\ \hline
+    \multicolumn{3}{l}{\textbf{Instrumentation Treatment:}} \\
+    \rightIndent{}MetricSamplingRate & Changes the sampling interval for metrics & \textsc{Collector} \\
+    \rightIndent{}TracingSamplingStrategy & Samples traces based on a given Strategy & \textsc{Collector} \\
+    \rightIndent{}TracingSamplingRate & Samples traces based on a given sampling rate & \textsc{Collector}
+\end{tabular}
+    
+

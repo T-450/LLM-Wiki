@@ -1,0 +1,126 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\doi}[1]{https://doi.org/#1}
+
+\bibitem{Aceto2013monitoringsurvey}
+Aceto, G., Botta, A., de~Donato, W., Pescapè, A.: Cloud monitoring: A survey.
+  Computer Networks  \textbf{57}(9),  2093 -- 2115 (2013)
+
+\bibitem{alhamazani2015commercialtools}
+Alhamazani, K., Ranjan, R., Mitra, K., Rabhi, F., Jayaraman, P.P., Khan, S.U.,
+  Guabtni, A., Bhatnagar, V.: An overview of the commercial cloud monitoring
+  tools: research dimensions, design issues, and state-of-the-art. Computing
+  \textbf{97}(4),  357--377 (Apr 2015)
+
+\bibitem{beyer2016site}
+Beyer, B., Jones, C., Petoff, J., Murphy, N.R.: Site Reliability Engineering:
+  How Google Runs Production Systems. " O'Reilly Media, Inc." (2016)
+
+\bibitem{colville2006cmdb}
+Colville, R.J.: Cmdb or configuration database: Know the difference (2006)
+
+\bibitem{fatema2014toolsurvey}
+Fatema, K., Emeakaroha, V.C., Healy, P.D., Morrison, J.P., Lynn, T.: A survey
+  of cloud monitoring tools: Taxonomy, capabilities and objectives. Journal of
+  Parallel and Distributed Computing  \textbf{74}(10),  2918 -- 2933 (2014)
+
+\bibitem{diaz2017restfulAPIs}
+Gamez-Diaz, A., Fernandez, P., Ruiz-Cortes, A.: An analysis of restful apis
+  offerings in the industry. In: Service-Oriented Computing. pp. 589--604.
+  Springer International Publishing, Cham (2017)
+
+\bibitem{gopal1993observability}
+Gopal, M.: Modern Control System Theory. Halsted Press, New York, NY, USA, 2nd
+  edn. (1993)
+
+\bibitem{mGupta2018RuntimeMonitoring}
+Gupta, M., Mandal, A., Dasgupta, G., Serebrenik, A.: Runtime monitoring in
+  continuous deployment by differencing execution behavior model. In:
+  Service-Oriented Computing. pp. 812--827. Springer International Publishing,
+  Cham (2018)
+
+\bibitem{heger2017APM}
+Heger, C., van Hoorn, A., Mann, M., Okanovic, D.: Application performance
+  management: State of the art and challenges for the future. In: Proceedings
+  of the 8th ACM/SPEC International Conference on Performance Engineering (ICPE
+  '17). ACM (2017)
+
+\bibitem{IEEE1990glossary}
+IEEE: Ieee standard glossary of software engineering terminology (1990),
+  \url{https://ieeexplore.ieee.org/document/159342}
+
+\bibitem{johng2018estimating}
+Johng, H., Kim, D., Hill, T., Chung, L.: Estimating the performance of
+  cloud-based systems using benchmarking and simulation in a complementary
+  manner. In: Intl Conference on Service-Oriented Computing. pp. 576--591.
+  Springer (2018)
+
+\bibitem{kinsella2015complexitygap}
+Kinsella, J.: The cloud complexity gap: Making software more intelligent to
+  address complex infrastructure,
+  \url{https://www.cloudcomputing-news.net/news/2015/jun/17/cloud-complexity-gap-making-software-more-intelligent-address-complex-infrastructure/}
+
+\bibitem{knoche2019drivers}
+Knoche, H., Hasselbring, W.: Drivers and barriers for microservice adoption--a
+  survey among professionals in germany. Enterprise Modelling and Information
+  Systems Architectures (EMISAJ)--International Journal of Conceptual Modeling:
+  Vol. 14, Nr. 1  (2019)
+
+\bibitem{lin2018microscope}
+Lin, J., Chen, P., Zheng, Z.: Microscope: Pinpoint performance issues with
+  causal graphs in micro-service environments. In: Service-Oriented Computing.
+  pp. 3--20. Springer International Publishing, Cham (2018)
+
+\bibitem{mayring2014qualitative}
+Mayring, P.: Qualitative content analysis: Theoretical foundation, basic
+  procedures and software solution (2014)
+
+\bibitem{natu2016holistic}
+{Natu}, M., {Ghosh}, R.K., {Shyamsundar}, R.K., {Ranjan}, R.: Holistic
+  performance monitoring of hybrid clouds: Complexities and future directions.
+  IEEE Cloud Computing  \textbf{3}(1),  72--81 (Jan 2016)
+
+\bibitem{niedermaier2019guideline}
+Niedermaier, S., Koetter, F., Freymann, A., Wagner, S.: Interview guideline on
+  observability and monitoring of distributed systems (2019).
+  \doi{10.5281/zenodo.3346579}
+
+\bibitem{picoreti2018observability}
+{Picoreti}, R., {Pereira do Carmo}, A., {Mendonça de Queiroz}, F., {Salles
+  Garcia}, A., {Frizera Vassallo}, R., {Simeonidou}, D.: Multilevel
+  observability in cloud orchestration. In: 2018 IEEE 16th Intl Conf
+  DASC/PiCom/DataCom/CyberSciTech. pp. 776--784 (Aug 2018)
+
+\bibitem{Runeson2008}
+Runeson, P., H{\"o}st, M.: Guidelines for conducting and reporting case study
+  research in software engineering. Empirical Software Engineering
+  \textbf{14}(2), ~131 (Dec 2008)
+
+\bibitem{sambasivan2016principled}
+Sambasivan, R.R., Shafer, I., Mace, J., Sigelman, B.H., Fonseca, R., Ganger,
+  G.R.: Principled workflow-centric tracing of distributed systems. In:
+  Proceedings of the Seventh ACM Symposium on Cloud Computing. pp. 401--414.
+  ACM (2016)
+
+\bibitem{sfondrini2018cloudadoption}
+{Sfondrini}, N., {Motta}, G., {Longo}, A.: Public cloud adoption in
+  multinational companies: A survey. In: 2018 IEEE International Conference on
+  Services Computing (SCC). pp. 177--184 (July 2018)
+
+\bibitem{singer2008software}
+Singer, J., Sim, S.E., Lethbridge, T.C.: Software engineering data collection
+  for field studies. In: Guide to Advanced Empirical Software Engineering, pp.
+  9--34. Springer (2008)
+
+\bibitem{cSun2018ConstraintBasedModelDriven}
+Sun, C.a., Li, M., Jia, J., Han, J.: Constraint-based model-driven testing of
+  web services for behavior conformance. In: International Conference on
+  Service-Oriented Computing. pp. 543--559. Springer (2018)
+
+\bibitem{yYang2018TransparentlyCapturingExecutionPath}
+Yang, Y., Wang, L., Gu, J., Li, Y.: Transparently capturing execution path of
+  service/job request processing. In: Service-Oriented Computing. pp. 879--887.
+  Springer International Publishing, Cham (2018)
+
+\end{thebibliography}
