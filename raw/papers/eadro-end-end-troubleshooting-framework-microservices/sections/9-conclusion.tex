@@ -1,8 +1,0 @@
-\section{Conclusion}
-This paper first identifies two limitations of current troubleshooting approaches for microservices and aims to address them. The motivation is based on two observations: 1) the usefulness of logs and KPIs and the insufficiency of traces; 2) the unsatisfactory results delivered by current anomaly detectors.
-To this end, we propose an end-to-end troubleshooting approach for microservices, \name, the first work to integrate anomaly detection and root cause localization based on multi-source monitoring data.
-\name consists of powerful modality-specific models to learn intra-service behaviors from various data sources and a graph attention network to learn inter-service dependencies.
-Extensive experiments on two datasets demonstrate the effectiveness of \name in both detection and localization. 
-It achieves \textit{F1} of 0.988 and \textit{HR@1} of 0.982 on average, vastly outperforming all competitors, including derived multi-modal methods.
-The ablation study further validates the contributions of the involved data sources.
-Lastly, we release our code and data to facilitate future research.
